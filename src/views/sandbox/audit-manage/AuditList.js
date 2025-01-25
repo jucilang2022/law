@@ -56,7 +56,7 @@ export default function AuditList(props) {
     axios.patch(`/news/${item.id}`, { auditState: 0 }).then(res => {
       notification.info({
         message: `通知`,
-        description: `您可以到草稿箱中重新编辑您的新闻`,
+        description: `您可以到草稿箱中重新编辑该案件`,
         placement: 'bottomRight',
       });
     })
@@ -72,7 +72,7 @@ export default function AuditList(props) {
       props.history.push('/publish-manage/published')
       notification.info({
         message: `通知`,
-        description: `您可以到[发布管理/已发布]中重新编辑您的新闻`,
+        description: `您可以到[发布管理/已发布]中重新编辑该案件`,
         placement: 'bottomRight',
       });
     })

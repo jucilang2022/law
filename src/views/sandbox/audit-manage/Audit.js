@@ -58,7 +58,7 @@ export default function Audit() {
     }).then(res => {
       notification.info({
         message: `通知`,
-        description: `您可以到[案件审核/审核列表]中查看您的新闻审核状态`,
+        description: `您可以到[案件审核/审核列表]中查看该案件审核状态`,
         placement: 'bottomRight',
       });
     })

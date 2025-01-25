@@ -103,7 +103,7 @@ export default function Home() {
 
             option = {
                 title: {
-                    text: '当前用户发布新闻类图示',
+                    text: '当前知识库中案件类图示',
                     subtext: '饼状图',
                     left: 'center'
                 },

@@ -20,7 +20,7 @@ function usePublish(type) {
         }).then(res => {
             notification.info({
                 message: `通知`,
-                description: `您可以到[发布管理/已发布]中查看您的新闻`,
+                description: `您可以到[发布管理/已发布]中查看该案件`,
                 placement: 'bottomRight',
             });
         })
@@ -33,7 +33,7 @@ function usePublish(type) {
         }).then(res => {
             notification.info({
                 message: `通知`,
-                description: `您可以到[发布管理/已下线]中查看您的新闻`,
+                description: `您可以到[发布管理/已下线]中查看该案件`,
                 placement: 'bottomRight',
             });
         })
@@ -44,7 +44,7 @@ function usePublish(type) {
         axios.delete(`/news/${id}`).then(res => {
             notification.info({
                 message: `通知`,
-                description: `您已经成功删除了这个已下线的新闻`,
+                description: `您已经成功删除了这个已下线的案件`,
                 placement: 'bottomRight',
             });
         })
