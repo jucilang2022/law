@@ -1,0 +1,26 @@
+{
+    "posts": [
+        {
+            "id": 1,
+            "title": "修改",
+            "author": "typicode"
+        },
+        {
+            "id": 2,
+            "title": "22222",
+            "author": "tiechui"
+        }
+    ],
+    "comments": [
+        {
+            "id": 1,
+            "body": "11111-comment",
+            "postId": 1
+        },
+        {
+            "id": 2,
+            "body": "11111-comment",
+            "postId": 1
+        }
+    ]
+}
