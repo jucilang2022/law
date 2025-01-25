@@ -74,7 +74,7 @@ const UserForm = forwardRef((props, ref) => {
             </Form.Item>
             <Form.Item
                 name="region"
-                label="区域"
+                label="擅长领域"
                 rules={isDisabled ? [] : [
                     {
                         required: true,

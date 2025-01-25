@@ -3,7 +3,7 @@ import { Table } from 'antd'
 export default function NewsPublish(props) {
     const columns = [
         {
-            title: '新闻标题',
+            title: '案件名称',
             dataIndex: 'title',
             render: (title, item) => {
                 return <b><a href={`#/news-manage/preview/${item.id}`}>{title}</a></b>
@@ -14,7 +14,7 @@ export default function NewsPublish(props) {
             dataIndex: 'author',
         },
         {
-            title: '新闻分类',
+            title: '案件分类',
             dataIndex: 'category',
             render: (category) => {
                 return <div>{category.title}</div>

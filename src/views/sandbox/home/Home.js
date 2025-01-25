@@ -4,6 +4,7 @@ import { EditOutlined, EllipsisOutlined, FullscreenOutlined } from '@ant-design/
 import axios from 'axios';
 import * as Echarts from 'echarts';
 import _ from 'lodash';
+import helpImage from '../../pics/help.jpg';
 
 const { Meta } = Card;
 
@@ -46,7 +47,7 @@ export default function Home() {
 
         var option = {
             title: {
-                text: '新闻分类图示'
+                text: '案件分类图示'
             },
             tooltip: {},
             legend: {
@@ -164,7 +165,7 @@ export default function Home() {
                         cover={
                             <img
                                 alt="example"
-                                src="https://gw.alipayobjects.com/zos/rmsportal/JiqGstEfoWAOHiTxclqi.png"
+                                src={helpImage}
                             />
                         }
                         actions={[
@@ -180,7 +181,7 @@ export default function Home() {
                             title={username}
                             description={
                                 <div>
-                                    <b>{region ? region : '全球'}</b>
+                                    <b>{region ? region : '全领域'}</b>
                                     <span style={{ paddingLeft: '30px' }}>{roleName}</span>
                                 </div>
                             }
@@ -188,7 +189,7 @@ export default function Home() {
                     </Card>
                 </Col>
             </Row>
-            <Drawer width="500px" title="个人新闻分类" placement="right" closable={true} onClose={() => { setVisible(false) }} visible={visible}>
+            <Drawer width="500px" title="个人案件分类" placement="right" closable={true} onClose={() => { setVisible(false) }} visible={visible}>
                 <div ref={pieRef} style={{ width: "100%", height: "400px", marginTop: "30px" }}></div>
             </Drawer>
             <div ref={barRef} style={{ width: "100%", height: "400px", marginTop: "30px" }}></div>

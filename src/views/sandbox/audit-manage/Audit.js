@@ -22,7 +22,7 @@ export default function Audit() {
 
   const columns = [
     {
-      title: '新闻标题',
+      title: '案件名称',
       dataIndex: 'title',
       render: (title, item) => {
         return <a href={`#/news-manage/preview/${item.id}`}><b>{title}</b></a>
@@ -33,7 +33,7 @@ export default function Audit() {
       dataIndex: 'author',
     },
     {
-      title: '新闻分类',
+      title: '案件分类',
       dataIndex: 'category',
       render: (category) => {
         return <div>{category.title}</div>
@@ -58,7 +58,7 @@ export default function Audit() {
     }).then(res => {
       notification.info({
         message: `通知`,
-        description: `您可以到[审核管理/审核列表]中查看您的新闻审核状态`,
+        description: `您可以到[案件审核/审核列表]中查看您的新闻审核状态`,
         placement: 'bottomRight',
       });
     })

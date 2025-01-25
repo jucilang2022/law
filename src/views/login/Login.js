@@ -21,7 +21,7 @@ export default function Login(props) {
     <div>
       <ParticlesBg type="circle" bg={true} />
       <div className='formContainer'>
-        <div className='logintitle'>环球新闻网</div>
+        <div className='logintitle'>智能化在线法律援助平台</div>
         <Form
           name="normal_login"
           className="login-form"

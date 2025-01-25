@@ -57,25 +57,25 @@ export default function UserList() {
 
     const columns = [
         {
-            title: '区域',
+            title: '擅长领域',
             dataIndex: 'region',
             filters: [
                 ...regionList.map(item => ({
                     text: item.title,
                     value: item.value
                 })), {
-                    text: '全球',
-                    value: '全球'
+                    text: '全领域',
+                    value: '全领域'
                 }
             ],
             onFilter: (value, item) => {
-                if (value === '全球') {
+                if (value === '全领域') {
                     return item.region === '';
                 }
                 return item.region === value;
             },
             render: (region) => {
-                return <b>{region === '' ? '全球' : region}</b>;
+                return <b>{region === '' ? '全领域' : region}</b>;
             }
         },
         {

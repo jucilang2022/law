@@ -24,7 +24,7 @@ export default function NewsUpdate(props) {
             })
         } else {
             if (content === '' || content.trim() === '<p></p>') {
-                message.error('新闻内容不能为空')
+                message.error('案件内容不能为空')
             } else {
                 setCurrnet(current + 1)
             }
@@ -61,7 +61,7 @@ export default function NewsUpdate(props) {
         axios.patch(`/news/${props.match.params.id}`, {
             ...formInfo,
             "content": content,
-            // "region": User.region ? User.region : '全球',
+            // "region": User.region ? User.region : '全领域',
             // 'author': User.username,
             // 'roleId': User.roleId,
             'auditState': auditState,
@@ -83,14 +83,14 @@ export default function NewsUpdate(props) {
         <div>
             <PageHeader
                 className="site-page-header"
-                title="修改新闻"
+                title="修改案件"
                 onBack={() => props.history.goBack()}
                 subTitle="Write News"
             />
             <Steps current={current}>
-                <Step title="撰写新闻" description="新闻标题和分类" />
-                <Step title="新闻内容" description="新闻主体内容" />
-                <Step title="新闻提交" description="保存草稿或提交审核" />
+                <Step title="案件上传" description="案件名称和分类" />
+                <Step title="案件内容" description="案件主体内容" />
+                <Step title="案件提交" description="保存草稿或提交审核" />
             </Steps>
             <div style={{ marginTop: '50px' }}>
                 <div className={current === 0 ? '' : style.active}>
@@ -109,24 +109,24 @@ export default function NewsUpdate(props) {
                         ref={NewsForm}
                     >
                         <Form.Item
-                            label="新闻标题"
+                            label="案件名称"
                             name="title"
                             rules={[
                                 {
                                     required: true,
-                                    message: '请输入新闻标题！',
+                                    message: '请输入案件名称！',
                                 },
                             ]}
                         >
                             <Input />
                         </Form.Item>
                         <Form.Item
-                            label="新闻分类"
+                            label="案件分类"
                             name="categoryId"
                             rules={[
                                 {
                                     required: true,
-                                    message: '请选择新闻分类！',
+                                    message: '请选择案件分类！',
                                 },
                             ]}
                         ><Select>

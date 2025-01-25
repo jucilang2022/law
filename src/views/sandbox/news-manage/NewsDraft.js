@@ -25,7 +25,7 @@ export default function NewsDraft(props) {
       }
     },
     {
-      title: '新闻标题',
+      title: '案件名称',
       dataIndex: 'title',
       render: (title, item) => {
         return <a href={`#/news-manage/preview/${item.id}`}>{title}</a>
@@ -35,7 +35,7 @@ export default function NewsDraft(props) {
       dataIndex: 'author',
     },
     {
-      title: '新闻分类',
+      title: '案件分类',
       dataIndex: 'category',
       render: (category) => {
         return category.title;

@@ -20,7 +20,7 @@ export default function News() {
             backgroundRepeat: 'no-repeat',
             backgroundSize: 'cover'
         }}>
-            <div style={{ height: '25px', backgroundColor: 'rgb(0, 129, 129)', textAlign: 'center', color: "#ffffff" }}>环球新闻网</div>
+            <div style={{ height: '25px', backgroundColor: 'rgb(0, 129, 129)', textAlign: 'center', color: "#ffffff" }}>智能化在线法律援助平台</div>
 
             <Row gutter={[10, 10]}>
                 {

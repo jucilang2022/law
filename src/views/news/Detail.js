@@ -35,7 +35,7 @@ export default function Detail(props) {
         <div>
             {
                 newsInfo && <div>
-                    <div style={{ height: '25px', backgroundColor: 'rgb(0, 129, 129)', textAlign: 'center', color: "#ffffff" }}>环球新闻网</div>
+                    <div style={{ height: '25px', backgroundColor: 'rgb(0, 129, 129)', textAlign: 'center', color: "#ffffff" }}>智能化在线法律援助平台</div>
                     <PageHeader
                         className="site-page-header-responsive"
                         onBack={() => window.history.back()}
@@ -49,7 +49,7 @@ export default function Detail(props) {
                         <Descriptions size="small" column={3}>
                             <Descriptions.Item label="创建者">{newsInfo.author}</Descriptions.Item>
                             <Descriptions.Item label="发布时间">{newsInfo.publishTime ? moment(newsInfo.publishTime).format('YYYY/MM/DD HH:mm:ss') : '-'}</Descriptions.Item>
-                            <Descriptions.Item label="区域">{newsInfo.region}</Descriptions.Item>
+                            <Descriptions.Item label="擅长领域">{newsInfo.region}</Descriptions.Item>
                             <Descriptions.Item label="访问数量"><b style={{ color: 'green' }}>{newsInfo.view}</b></Descriptions.Item>
                             <Descriptions.Item label="点赞数量"><b style={{ color: 'green' }}>{newsInfo.star}</b></Descriptions.Item>
                             <Descriptions.Item label="评论数量"><b style={{ color: 'green' }}>0</b></Descriptions.Item>
