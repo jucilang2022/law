@@ -293,3 +293,37 @@ body .main-header {
     color: #ff7875;
     background: rgba(255, 77, 79, 0.1);
 }
+
+.message-audio {
+    margin: 8px 0;
+}
+
+.message-audio audio {
+    width: 100%;
+    max-width: 300px;
+    height: 32px;
+}
+
+.recording-button {
+    color: #ff4d4f !important;
+    animation: pulse 1.5s infinite;
+}
+
+@keyframes pulse {
+    0% {
+        transform: scale(1);
+    }
+    50% {
+        transform: scale(1.1);
+    }
+    100% {
+        transform: scale(1);
+    }
+}
+
+.chat-actions {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    margin-top: 8px;
+}

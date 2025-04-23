@@ -1,6 +1,6 @@
 import React, { useEffect, useState, useRef } from 'react';
-import { Card, Avatar, Typography, Input, Button, message, Select, Tag, Modal } from 'antd';
-import { SendOutlined, UserOutlined, MinusOutlined, MessageOutlined, DeleteOutlined } from '@ant-design/icons';
+import { Card, Avatar, Typography, Input, Button, message, Select, Tag, Modal, Upload } from 'antd';
+import { SendOutlined, UserOutlined, MinusOutlined, MessageOutlined, DeleteOutlined, PictureOutlined, AudioOutlined, StopOutlined } from '@ant-design/icons';
 import axios from 'axios';
 import './ChatBox.css';
 
@@ -22,6 +22,11 @@ export default function ChatBox({ lawyerId }) {
     const messagesEndRef = useRef(null);
     const chatMessagesRef = useRef(null);
     const chatBoxRef = useRef(null);
+    const [uploading, setUploading] = useState(false);
+    const [isRecording, setIsRecording] = useState(false);
+    const [audioBlob, setAudioBlob] = useState(null);
+    const mediaRecorderRef = useRef(null);
+    const audioChunksRef = useRef([]);
 
     // 处理拖动开始
     const handleDragStart = (e) => {
@@ -187,6 +192,161 @@ export default function ChatBox({ lawyerId }) {
         });
     };
 
+    // 处理图片上传
+    const handleImageUpload = async (file) => {
+        if (!selectedUser) {
+            message.warning('请先选择要回复的用户');
+            return false;
+        }
+
+        setUploading(true);
+        const formData = new FormData();
+        formData.append('image', file);
+
+        try {
+            const response = await axios.post('http://localhost:3001/upload', formData, {
+                headers: {
+                    'Content-Type': 'multipart/form-data',
+                },
+                timeout: 10000, // 设置超时时间为10秒
+            });
+
+            if (!response.data || !response.data.url) {
+                throw new Error('服务器返回数据格式错误');
+            }
+
+            const imageUrl = response.data.url;
+            const newMessage = {
+                type: 'lawyer',
+                content: imageUrl,
+                timestamp: new Date().toISOString(),
+                userId: selectedUser.id,
+                lawyerId: lawyerId,
+                messageType: 'image'
+            };
+
+            const updatedMessages = [...chatMessages, newMessage];
+            setChatMessages(updatedMessages);
+
+            await axios.patch(`/users/${lawyerId}`, {
+                chatInfo: JSON.stringify(updatedMessages)
+            });
+
+            message.success('图片发送成功');
+            fetchChatMessages();
+        } catch (error) {
+            console.error('上传错误:', error);
+            if (error.response) {
+                // 服务器返回了错误状态码
+                message.error(`上传失败: ${error.response.status} ${error.response.statusText}`);
+            } else if (error.request) {
+                // 请求已发出但没有收到响应
+                message.error('无法连接到服务器，请检查网络连接');
+            } else {
+                // 请求配置出错
+                message.error('上传配置错误');
+            }
+        } finally {
+            setUploading(false);
+        }
+        return false;
+    };
+
+    // 开始录音
+    const startRecording = async () => {
+        if (!selectedUser) {
+            message.warning('请先选择要回复的用户');
+            return;
+        }
+
+        try {
+            const stream = await navigator.mediaDevices.getUserMedia({ audio: true });
+            const mediaRecorder = new MediaRecorder(stream);
+            mediaRecorderRef.current = mediaRecorder;
+            audioChunksRef.current = [];
+
+            mediaRecorder.ondataavailable = (event) => {
+                if (event.data.size > 0) {
+                    audioChunksRef.current.push(event.data);
+                }
+            };
+
+            mediaRecorder.onstop = async () => {
+                const audioBlob = new Blob(audioChunksRef.current, { type: 'audio/wav' });
+                setAudioBlob(audioBlob);
+                await handleAudioUpload(audioBlob);
+            };
+
+            mediaRecorder.start();
+            setIsRecording(true);
+        } catch (error) {
+            message.error('无法访问麦克风');
+            console.error('录音错误:', error);
+        }
+    };
+
+    // 停止录音
+    const stopRecording = () => {
+        if (mediaRecorderRef.current && isRecording) {
+            mediaRecorderRef.current.stop();
+            mediaRecorderRef.current.stream.getTracks().forEach(track => track.stop());
+            setIsRecording(false);
+        }
+    };
+
+    // 处理音频上传
+    const handleAudioUpload = async (audioBlob) => {
+        if (!audioBlob) return;
+
+        const formData = new FormData();
+        formData.append('audio', audioBlob, 'recording.wav');
+
+        try {
+            const response = await axios.post('http://localhost:3001/upload-audio', formData, {
+                headers: {
+                    'Content-Type': 'multipart/form-data',
+                },
+                timeout: 10000, // 设置超时时间为10秒
+            });
+
+            if (!response.data || !response.data.url) {
+                throw new Error('服务器返回数据格式错误');
+            }
+
+            const audioUrl = response.data.url;
+            const newMessage = {
+                type: 'lawyer',
+                content: audioUrl,
+                timestamp: new Date().toISOString(),
+                userId: selectedUser.id,
+                lawyerId: lawyerId,
+                messageType: 'audio'
+            };
+
+            const updatedMessages = [...chatMessages, newMessage];
+            setChatMessages(updatedMessages);
+
+            await axios.patch(`/users/${lawyerId}`, {
+                chatInfo: JSON.stringify(updatedMessages)
+            });
+
+            message.success('语音发送成功');
+            fetchChatMessages();
+        } catch (error) {
+            console.error('上传错误:', error);
+            if (error.response) {
+                // 服务器返回了错误状态码
+                message.error(`上传失败: ${error.response.status} ${error.response.statusText}`);
+            } else if (error.request) {
+                // 请求已发出但没有收到响应
+                message.error('无法连接到服务器，请检查网络连接');
+            } else {
+                // 请求配置出错
+                message.error('上传配置错误');
+            }
+        }
+    };
+
     const chatBoxStyle = {
         position: 'fixed',
         left: `${position.x}px`,
@@ -278,7 +438,19 @@ export default function ChatBox({ lawyerId }) {
                                         {new Date(msg.timestamp).toLocaleString()}
                                     </span>
                                 </div>
-                                <div className="message-text">{msg.content}</div>
+                                {msg.messageType === 'image' ? (
+                                    <div className="message-image">
+                                        <img src={msg.content} alt="聊天图片" />
+                                    </div>
+                                ) : msg.messageType === 'audio' ? (
+                                    <div className="message-audio">
+                                        <audio controls src={msg.content}>
+                                            您的浏览器不支持音频播放
+                                        </audio>
+                                    </div>
+                                ) : (
+                                    <div className="message-text">{msg.content}</div>
+                                )}
                             </div>
                             {msg.type === 'lawyer' && (
                                 <Avatar
@@ -305,14 +477,33 @@ export default function ChatBox({ lawyerId }) {
                         }
                     }}
                 />
-                <Button
-                    type="primary"
-                    icon={<SendOutlined />}
-                    className="send-button"
-                    onClick={handleSendMessage}
-                >
-                    发送
-                </Button>
+                <div className="chat-actions">
+                    <Button
+                        type="text"
+                        icon={isRecording ? <StopOutlined /> : <AudioOutlined />}
+                        onClick={isRecording ? stopRecording : startRecording}
+                        className={isRecording ? 'recording-button' : ''}
+                    />
+                    <Upload
+                        showUploadList={false}
+                        beforeUpload={handleImageUpload}
+                        accept="image/*"
+                    >
+                        <Button
+                            type="text"
+                            icon={<PictureOutlined />}
+                            loading={uploading}
+                        />
+                    </Upload>
+                    <Button
+                        type="primary"
+                        icon={<SendOutlined />}
+                        className="send-button"
+                        onClick={handleSendMessage}
+                    >
+                        发送
+                    </Button>
+                </div>
             </div>
         </Card>
     );

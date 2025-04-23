@@ -1,8 +1,8 @@
 import React, { useEffect, useState, useRef } from 'react'
 import axios from 'axios'
 import _ from 'lodash'
-import { Card, Col, Row, List, Layout, Typography, Input, Button, Avatar, Select, message, Modal } from 'antd';
-import { SendOutlined, UserOutlined, DeleteOutlined } from '@ant-design/icons';
+import { Card, Col, Row, List, Layout, Typography, Input, Button, Avatar, Select, message, Modal, Upload } from 'antd';
+import { SendOutlined, UserOutlined, DeleteOutlined, PictureOutlined, AudioOutlined, StopOutlined } from '@ant-design/icons';
 import './News.css'
 
 const { Header, Content } = Layout;
@@ -18,6 +18,11 @@ export default function News() {
     const [inputMessage, setInputMessage] = useState('')
     const [userInfo, setUserInfo] = useState(null)
     const messagesEndRef = useRef(null)
+    const [uploading, setUploading] = useState(false);
+    const [isRecording, setIsRecording] = useState(false);
+    const [audioBlob, setAudioBlob] = useState(null);
+    const mediaRecorderRef = useRef(null);
+    const audioChunksRef = useRef([]);
 
     // 滚动到最新消息
     const scrollToBottom = () => {
@@ -149,6 +154,155 @@ export default function News() {
         });
     };
 
+    // 处理图片上传
+    const handleImageUpload = async (file) => {
+        if (!selectedLawyer) {
+            message.warning('请先选择律师');
+            return false;
+        }
+        if (!userInfo) {
+            message.warning('请先登录');
+            return false;
+        }
+
+        setUploading(true);
+        const formData = new FormData();
+        formData.append('image', file);
+
+        try {
+            const response = await axios.post('http://localhost:3001/upload', formData, {
+                headers: {
+                    'Content-Type': 'multipart/form-data',
+                },
+            });
+
+            const imageUrl = response.data.url;
+            const newMessage = {
+                type: 'user',
+                content: imageUrl,
+                timestamp: new Date().toISOString(),
+                userId: userInfo.id,
+                lawyerId: selectedLawyer.id,
+                messageType: 'image'
+            };
+
+            const updatedMessages = [...chatMessages, newMessage];
+            setChatMessages(updatedMessages);
+
+            const updatedLawyer = {
+                ...selectedLawyer,
+                chatInfo: JSON.stringify(updatedMessages)
+            };
+
+            await axios.patch(`/users/${selectedLawyer.id}`, updatedLawyer);
+            message.success('图片发送成功');
+            fetchChatMessages();
+        } catch (error) {
+            message.error('图片上传失败');
+        } finally {
+            setUploading(false);
+        }
+        return false;
+    };
+
+    // 开始录音
+    const startRecording = async () => {
+        if (!selectedLawyer) {
+            message.warning('请先选择律师');
+            return;
+        }
+        if (!userInfo) {
+            message.warning('请先登录');
+            return;
+        }
+
+        try {
+            const stream = await navigator.mediaDevices.getUserMedia({ audio: true });
+            const mediaRecorder = new MediaRecorder(stream);
+            mediaRecorderRef.current = mediaRecorder;
+            audioChunksRef.current = [];
+
+            mediaRecorder.ondataavailable = (event) => {
+                if (event.data.size > 0) {
+                    audioChunksRef.current.push(event.data);
+                }
+            };
+
+            mediaRecorder.onstop = async () => {
+                const audioBlob = new Blob(audioChunksRef.current, { type: 'audio/wav' });
+                setAudioBlob(audioBlob);
+                await handleAudioUpload(audioBlob);
+            };
+
+            mediaRecorder.start();
+            setIsRecording(true);
+        } catch (error) {
+            message.error('无法访问麦克风');
+            console.error('录音错误:', error);
+        }
+    };
+
+    // 停止录音
+    const stopRecording = () => {
+        if (mediaRecorderRef.current && isRecording) {
+            mediaRecorderRef.current.stop();
+            mediaRecorderRef.current.stream.getTracks().forEach(track => track.stop());
+            setIsRecording(false);
+        }
+    };
+
+    // 处理音频上传
+    const handleAudioUpload = async (audioBlob) => {
+        if (!audioBlob) return;
+
+        const formData = new FormData();
+        formData.append('audio', audioBlob, 'recording.wav');
+
+        try {
+            const response = await axios.post('http://localhost:3001/upload-audio', formData, {
+                headers: {
+                    'Content-Type': 'multipart/form-data',
+                },
+                timeout: 10000,
+            });
+
+            if (!response.data || !response.data.url) {
+                throw new Error('服务器返回数据格式错误');
+            }
+
+            const audioUrl = response.data.url;
+            const newMessage = {
+                type: 'user',
+                content: audioUrl,
+                timestamp: new Date().toISOString(),
+                userId: userInfo.id,
+                lawyerId: selectedLawyer.id,
+                messageType: 'audio'
+            };
+
+            const updatedMessages = [...chatMessages, newMessage];
+            setChatMessages(updatedMessages);
+
+            const updatedLawyer = {
+                ...selectedLawyer,
+                chatInfo: JSON.stringify(updatedMessages)
+            };
+
+            await axios.patch(`/users/${selectedLawyer.id}`, updatedLawyer);
+            message.success('语音发送成功');
+            fetchChatMessages();
+        } catch (error) {
+            console.error('上传错误:', error);
+            if (error.response) {
+                message.error(`上传失败: ${error.response.status} ${error.response.statusText}`);
+            } else if (error.request) {
+                message.error('无法连接到服务器，请检查网络连接');
+            } else {
+                message.error('上传配置错误');
+            }
+        }
+    };
+
     return (
         <Layout className="main-layout">
             <Header className="main-header">
@@ -245,7 +399,19 @@ export default function News() {
                                                                 {new Date(msg.timestamp).toLocaleString()}
                                                             </span>
                                                         </div>
-                                                        <div className="message-text">{msg.content}</div>
+                                                        {msg.messageType === 'image' ? (
+                                                            <div className="message-image">
+                                                                <img src={msg.content} alt="聊天图片" />
+                                                            </div>
+                                                        ) : msg.messageType === 'audio' ? (
+                                                            <div className="message-audio">
+                                                                <audio controls src={msg.content}>
+                                                                    您的浏览器不支持音频播放
+                                                                </audio>
+                                                            </div>
+                                                        ) : (
+                                                            <div className="message-text">{msg.content}</div>
+                                                        )}
                                                     </div>
                                                     {msg.type === 'user' && (
                                                         <Avatar
@@ -271,14 +437,33 @@ export default function News() {
                                                 }
                                             }}
                                         />
-                                        <Button
-                                            type="primary"
-                                            icon={<SendOutlined />}
-                                            className="send-button"
-                                            onClick={handleSendMessage}
-                                        >
-                                            发送
-                                        </Button>
+                                        <div className="chat-actions">
+                                            <Button
+                                                type="text"
+                                                icon={isRecording ? <StopOutlined /> : <AudioOutlined />}
+                                                onClick={isRecording ? stopRecording : startRecording}
+                                                className={isRecording ? 'recording-button' : ''}
+                                            />
+                                            <Upload
+                                                showUploadList={false}
+                                                beforeUpload={handleImageUpload}
+                                                accept="image/*"
+                                            >
+                                                <Button
+                                                    type="text"
+                                                    icon={<PictureOutlined />}
+                                                    loading={uploading}
+                                                />
+                                            </Upload>
+                                            <Button
+                                                type="primary"
+                                                icon={<SendOutlined />}
+                                                className="send-button"
+                                                onClick={handleSendMessage}
+                                            >
+                                                发送
+                                            </Button>
+                                        </div>
                                     </div>
                                 </Card>
                             </div>

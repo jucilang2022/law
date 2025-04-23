@@ -222,3 +222,53 @@
 .ant-select-dropdown {
     z-index: 1100 !important;
 }
+
+.message-image {
+    max-width: 300px;
+    margin: 8px 0;
+}
+
+.message-image img {
+    max-width: 100%;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: transform 0.2s;
+}
+
+.message-image img:hover {
+    transform: scale(1.02);
+}
+
+.chat-actions {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    margin-top: 8px;
+}
+
+.message-audio {
+    margin: 8px 0;
+}
+
+.message-audio audio {
+    width: 100%;
+    max-width: 300px;
+    height: 32px;
+}
+
+.recording-button {
+    color: #ff4d4f !important;
+    animation: pulse 1.5s infinite;
+}
+
+@keyframes pulse {
+    0% {
+        transform: scale(1);
+    }
+    50% {
+        transform: scale(1.1);
+    }
+    100% {
+        transform: scale(1);
+    }
+}

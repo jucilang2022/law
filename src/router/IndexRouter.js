@@ -10,7 +10,7 @@ export default function IndexRouter() {
         <HashRouter>
             <Switch>
                 <Route path='/login' component={Login} />
-                <Route path='/news' component={News} />
+                <Route path='/users' component={News} />
                 <Route path='/detail/:id' component={Detail} />
                 <Route path='/' render={() =>
                     localStorage.getItem('token') ?
