@@ -2,7 +2,7 @@ import React, { useEffect, useState, useRef } from 'react'
 import axios from 'axios'
 import _ from 'lodash'
 import { Card, Col, Row, List, Layout, Typography, Input, Button, Avatar, Select, message, Modal, Upload } from 'antd';
-import { SendOutlined, UserOutlined, DeleteOutlined, PictureOutlined, AudioOutlined, StopOutlined } from '@ant-design/icons';
+import { SendOutlined, UserOutlined, DeleteOutlined, PictureOutlined, AudioOutlined, StopOutlined, MessageOutlined } from '@ant-design/icons';
 import './News.css'
 
 const { Header, Content } = Layout;
@@ -23,6 +23,8 @@ export default function News() {
     const [audioBlob, setAudioBlob] = useState(null);
     const mediaRecorderRef = useRef(null);
     const audioChunksRef = useRef([]);
+    const [unreadCount, setUnreadCount] = useState(0);
+    const [isChatVisible, setIsChatVisible] = useState(true);
 
     // 滚动到最新消息
     const scrollToBottom = () => {
@@ -64,11 +66,28 @@ export default function News() {
                             msg.userId === userInfo.id || msg.lawyerId === selectedLawyer.id
                         )
                         setChatMessages(userChatHistory)
+
+                        // 计算未读消息数量（用户发送的消息且未展开聊天框时）
+                        if (!isChatVisible) {
+                            const unreadMessages = userChatHistory.filter(msg =>
+                                msg.type === 'user' &&
+                                msg.userId !== userInfo.id
+                            )
+                            setUnreadCount(unreadMessages.length)
+                        }
                     } catch (e) {
                         setChatMessages([])
                     }
                 }
             })
+        }
+    }
+
+    // 切换聊天框显示状态
+    const toggleChatVisibility = () => {
+        setIsChatVisible(!isChatVisible)
+        if (!isChatVisible) {
+            setUnreadCount(0) // 展开聊天框时清零未读消息数
         }
     }
 
@@ -353,119 +372,133 @@ export default function News() {
                             <div className="chat-section">
                                 <div className="section-header">
                                     <Title level={3} className="section-title">在线咨询</Title>
-                                    <Button
-                                        type="text"
-                                        icon={<DeleteOutlined />}
-                                        onClick={handleDeleteChat}
-                                        className="delete-button"
-                                    />
-                                </div>
-                                <Card className="chat-card">
-                                    <div className="lawyer-select">
-                                        <Select
-                                            style={{ width: '100%' }}
-                                            placeholder="请选择律师"
-                                            onChange={handleLawyerSelect}
-                                            value={selectedLawyer?.id}
+                                    <div className="chat-header-actions">
+                                        <Button
+                                            type="text"
+                                            icon={<DeleteOutlined />}
+                                            onClick={handleDeleteChat}
+                                            className="delete-button"
+                                        />
+                                        <Button
+                                            type="text"
+                                            icon={<MessageOutlined />}
+                                            onClick={toggleChatVisibility}
+                                            className="toggle-chat-button"
                                         >
-                                            {lawyers.map(lawyer => (
-                                                <Option key={lawyer.id} value={lawyer.id}>
-                                                    {lawyer.username}
-                                                </Option>
-                                            ))}
-                                        </Select>
+                                            {!isChatVisible && unreadCount > 0 && (
+                                                <span className="unread-badge">{unreadCount}</span>
+                                            )}
+                                        </Button>
                                     </div>
-                                    <div className="chat-messages">
-                                        {chatMessages.length === 0 ? (
-                                            <div className="message system">
-                                                请选择一位律师开始咨询
-                                            </div>
-                                        ) : (
-                                            chatMessages.map((msg, index) => (
-                                                <div key={index} className={`message ${msg.type === 'user' ? 'self' : 'other'}`}>
-                                                    {msg.type === 'lawyer' && (
-                                                        <Avatar
-                                                            style={{ backgroundColor: '#008181' }}
-                                                        >
-                                                            L
-                                                        </Avatar>
-                                                    )}
-                                                    <div className="message-content">
-                                                        <div className="message-header">
-                                                            <span className="message-sender">
-                                                                {msg.type === 'user' ? userInfo.username : '律师'}
-                                                            </span>
-                                                            <span className="message-time">
-                                                                {new Date(msg.timestamp).toLocaleString()}
-                                                            </span>
+                                </div>
+                                {isChatVisible && (
+                                    <Card className="chat-card">
+                                        <div className="lawyer-select">
+                                            <Select
+                                                style={{ width: '100%' }}
+                                                placeholder="请选择律师"
+                                                onChange={handleLawyerSelect}
+                                                value={selectedLawyer?.id}
+                                            >
+                                                {lawyers.map(lawyer => (
+                                                    <Option key={lawyer.id} value={lawyer.id}>
+                                                        {lawyer.username}
+                                                    </Option>
+                                                ))}
+                                            </Select>
+                                        </div>
+                                        <div className="chat-messages">
+                                            {chatMessages.length === 0 ? (
+                                                <div className="message system">
+                                                    请选择一位律师开始咨询
+                                                </div>
+                                            ) : (
+                                                chatMessages.map((msg, index) => (
+                                                    <div key={index} className={`message ${msg.type === 'user' ? 'self' : 'other'}`}>
+                                                        {msg.type === 'lawyer' && (
+                                                            <Avatar
+                                                                style={{ backgroundColor: '#008181' }}
+                                                            >
+                                                                L
+                                                            </Avatar>
+                                                        )}
+                                                        <div className="message-content">
+                                                            <div className="message-header">
+                                                                <span className="message-sender">
+                                                                    {msg.type === 'user' ? userInfo.username : '律师'}
+                                                                </span>
+                                                                <span className="message-time">
+                                                                    {new Date(msg.timestamp).toLocaleString()}
+                                                                </span>
+                                                            </div>
+                                                            {msg.messageType === 'image' ? (
+                                                                <div className="message-image">
+                                                                    <img src={msg.content} alt="聊天图片" />
+                                                                </div>
+                                                            ) : msg.messageType === 'audio' ? (
+                                                                <div className="message-audio">
+                                                                    <audio controls src={msg.content}>
+                                                                        您的浏览器不支持音频播放
+                                                                    </audio>
+                                                                </div>
+                                                            ) : (
+                                                                <div className="message-text">{msg.content}</div>
+                                                            )}
                                                         </div>
-                                                        {msg.messageType === 'image' ? (
-                                                            <div className="message-image">
-                                                                <img src={msg.content} alt="聊天图片" />
-                                                            </div>
-                                                        ) : msg.messageType === 'audio' ? (
-                                                            <div className="message-audio">
-                                                                <audio controls src={msg.content}>
-                                                                    您的浏览器不支持音频播放
-                                                                </audio>
-                                                            </div>
-                                                        ) : (
-                                                            <div className="message-text">{msg.content}</div>
+                                                        {msg.type === 'user' && (
+                                                            <Avatar
+                                                                icon={<UserOutlined />}
+                                                                style={{ backgroundColor: '#87d068' }}
+                                                            />
                                                         )}
                                                     </div>
-                                                    {msg.type === 'user' && (
-                                                        <Avatar
-                                                            icon={<UserOutlined />}
-                                                            style={{ backgroundColor: '#87d068' }}
-                                                        />
-                                                    )}
-                                                </div>
-                                            ))
-                                        )}
-                                        <div ref={messagesEndRef} />
-                                    </div>
-                                    <div className="chat-input">
-                                        <TextArea
-                                            placeholder="请输入您的问题..."
-                                            autoSize={{ minRows: 2, maxRows: 4 }}
-                                            value={inputMessage}
-                                            onChange={(e) => setInputMessage(e.target.value)}
-                                            onPressEnter={(e) => {
-                                                if (!e.shiftKey) {
-                                                    e.preventDefault()
-                                                    handleSendMessage()
-                                                }
-                                            }}
-                                        />
-                                        <div className="chat-actions">
-                                            <Button
-                                                type="text"
-                                                icon={isRecording ? <StopOutlined /> : <AudioOutlined />}
-                                                onClick={isRecording ? stopRecording : startRecording}
-                                                className={isRecording ? 'recording-button' : ''}
+                                                ))
+                                            )}
+                                            <div ref={messagesEndRef} />
+                                        </div>
+                                        <div className="chat-input">
+                                            <TextArea
+                                                placeholder="请输入您的问题..."
+                                                autoSize={{ minRows: 2, maxRows: 4 }}
+                                                value={inputMessage}
+                                                onChange={(e) => setInputMessage(e.target.value)}
+                                                onPressEnter={(e) => {
+                                                    if (!e.shiftKey) {
+                                                        e.preventDefault()
+                                                        handleSendMessage()
+                                                    }
+                                                }}
                                             />
-                                            <Upload
-                                                showUploadList={false}
-                                                beforeUpload={handleImageUpload}
-                                                accept="image/*"
-                                            >
+                                            <div className="chat-actions">
                                                 <Button
                                                     type="text"
-                                                    icon={<PictureOutlined />}
-                                                    loading={uploading}
+                                                    icon={isRecording ? <StopOutlined /> : <AudioOutlined />}
+                                                    onClick={isRecording ? stopRecording : startRecording}
+                                                    className={isRecording ? 'recording-button' : ''}
                                                 />
-                                            </Upload>
-                                            <Button
-                                                type="primary"
-                                                icon={<SendOutlined />}
-                                                className="send-button"
-                                                onClick={handleSendMessage}
-                                            >
-                                                发送
-                                            </Button>
+                                                <Upload
+                                                    showUploadList={false}
+                                                    beforeUpload={handleImageUpload}
+                                                    accept="image/*"
+                                                >
+                                                    <Button
+                                                        type="text"
+                                                        icon={<PictureOutlined />}
+                                                        loading={uploading}
+                                                    />
+                                                </Upload>
+                                                <Button
+                                                    type="primary"
+                                                    icon={<SendOutlined />}
+                                                    className="send-button"
+                                                    onClick={handleSendMessage}
+                                                >
+                                                    发送
+                                                </Button>
+                                            </div>
                                         </div>
-                                    </div>
-                                </Card>
+                                    </Card>
+                                )}
                             </div>
                         </Col>
                     )}

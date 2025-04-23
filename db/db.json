@@ -17,7 +17,7 @@
       "roleState": "true",
       "default": false,
       "id": 9,
-      "chatInfo": "[{\"type\":\"user\",\"content\":\"张律师您好，我有一个问题想要咨询您。\",\"timestamp\":\"2025-04-23T06:16:57.575Z\",\"userId\":12,\"lawyerId\":9},{\"type\":\"lawyer\",\"content\":\"请您讲，我会竭诚为您服务。\",\"timestamp\":\"2025-04-23T06:17:32.067Z\",\"userId\":12,\"lawyerId\":9},{\"type\":\"user\",\"content\":\"您好\",\"timestamp\":\"2025-04-23T07:30:07.710Z\",\"userId\":13,\"lawyerId\":9},{\"type\":\"user\",\"content\":\"1\",\"timestamp\":\"2025-04-23T07:30:27.859Z\",\"userId\":13,\"lawyerId\":9},{\"type\":\"user\",\"content\":\"/chat_images/1745398115872-259230118.png\",\"timestamp\":\"2025-04-23T08:48:35.922Z\",\"userId\":11,\"lawyerId\":9,\"messageType\":\"image\"},{\"type\":\"lawyer\",\"content\":\"/chat_images/1745398252567-686706576.jpg\",\"timestamp\":\"2025-04-23T08:50:52.585Z\",\"userId\":13,\"lawyerId\":9,\"messageType\":\"image\"},{\"type\":\"lawyer\",\"content\":\"你看这个红旗\",\"timestamp\":\"2025-04-23T08:51:01.992Z\",\"userId\":13,\"lawyerId\":9},{\"type\":\"lawyer\",\"content\":\"/chat_audio/1745398601924-461442825.wav\",\"timestamp\":\"2025-04-23T08:56:41.949Z\",\"userId\":13,\"lawyerId\":9,\"messageType\":\"audio\"},{\"type\":\"user\",\"content\":\"/chat_audio/1745398743279-653979126.wav\",\"timestamp\":\"2025-04-23T08:59:03.298Z\",\"userId\":11,\"lawyerId\":9,\"messageType\":\"audio\"}]"
+      "chatInfo": "[{\"type\":\"lawyer\",\"content\":\"/chat_images/1745408271653-36429306.jpg\",\"timestamp\":\"2025-04-23T11:37:51.661Z\",\"userId\":13,\"lawyerId\":9,\"messageType\":\"image\"},{\"type\":\"lawyer\",\"content\":\"看看这个\",\"timestamp\":\"2025-04-23T11:37:58.790Z\",\"userId\":13,\"lawyerId\":9},{\"type\":\"user\",\"content\":\"好看啊，太好看了\",\"timestamp\":\"2025-04-23T11:39:28.485Z\",\"userId\":11,\"lawyerId\":9},{\"type\":\"lawyer\",\"content\":\"我也觉得特别好看\",\"timestamp\":\"2025-04-23T11:44:34.171Z\",\"userId\":13,\"lawyerId\":9}]"
     },
     {
       "username": "wang",
@@ -1369,7 +1369,7 @@
       "publishState": 2,
       "createTime": 1745382942782,
       "star": 0,
-      "view": 4,
+      "view": 5,
       "id": 73,
       "publishTime": 1745382946927
     },
