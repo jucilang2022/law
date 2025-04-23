@@ -1,10 +1,11 @@
 import React, { useEffect, useState, useRef } from 'react';
-import { Card, Avatar, Input, Button, message, Select, Modal } from 'antd';
+import { Card, Avatar, Typography, Input, Button, message, Select, Tag, Modal } from 'antd';
 import { SendOutlined, UserOutlined, MinusOutlined, MessageOutlined, DeleteOutlined } from '@ant-design/icons';
 import axios from 'axios';
 import './ChatBox.css';
 
 const { TextArea } = Input;
+const { Title } = Typography;
 const { Option } = Select;
 
 export default function ChatBox({ lawyerId }) {

@@ -19,10 +19,10 @@ export default function News() {
     const [userInfo, setUserInfo] = useState(null)
     const messagesEndRef = useRef(null)
 
-    // // 滚动到最新消息
-    // const scrollToBottom = () => {
-    //     messagesEndRef.current?.scrollIntoView({ behavior: "smooth" });
-    // };
+    // 滚动到最新消息
+    const scrollToBottom = () => {
+        messagesEndRef.current?.scrollIntoView({ behavior: "smooth" });
+    };
 
     // 获取用户信息
     useEffect(() => {
