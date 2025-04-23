@@ -6,4 +6,290 @@
 
 .ant-list-item {
     font-size: 15px;
+    transition: all 0.3s ease;
+}
+
+.ant-list-item:hover {
+    background-color: #f5f5f5;
+    transform: translateX(5px);
+}
+
+.ant-card {
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+    transition: all 0.3s ease;
+    border-radius: 8px;
+    overflow: hidden;
+}
+
+.ant-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.15);
+}
+
+.ant-card-head {
+    background: #008181 !important;
+    color: white !important;
+}
+
+.ant-card-head-title {
+    color: white !important;
+}
+
+.ant-list-item a {
+    color: #333;
+    text-decoration: none;
+    transition: color 0.3s ease;
+}
+
+.ant-list-item a:hover {
+    color: #008181;
+}
+
+.news-container {
+    background: linear-gradient(135deg, #f5f7fa 0%, #e4e8eb 100%);
+    padding: 20px;
+    min-height: 100vh;
+}
+
+.news-header {
+    background: linear-gradient(135deg, #008181 0%, #00a0a0 100%);
+    color: white;
+    padding: 15px 0;
+    text-align: center;
+    font-size: 24px;
+    font-weight: bold;
+    margin-bottom: 20px;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+}
+
+.main-layout {
+    min-height: 100vh;
+    background: linear-gradient(135deg, #f5f7fa 0%, #e4e8eb 100%);
+}
+
+body .main-header {
+    background: linear-gradient(135deg, #008181 0%, #00a0a0 100%);
+    padding: 0 20px;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+}
+
+.header-title {
+    color: white;
+    font-size: 24px;
+    font-weight: bold;
+    text-align: center;
+    line-height: 64px;
+}
+
+.main-content {
+    padding: 20px;
+}
+
+.section-title {
+    color: #008181;
+    margin-bottom: 20px !important;
+}
+
+.case-section,
+.chat-section {
+    background: white;
+    border-radius: 8px;
+    padding: 20px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+}
+
+.ant-card {
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+    transition: all 0.3s ease;
+    border-radius: 8px;
+    overflow: hidden;
+}
+
+.ant-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.15);
+}
+
+.ant-card-head {
+    background: #008181;
+    color: white !important;
+}
+
+.ant-card-head-title {
+    color: white !important;
+}
+
+.ant-list-item {
+    font-size: 15px;
+    transition: all 0.3s ease;
+}
+
+.ant-list-item:hover {
+    background-color: #f5f5f5;
+    transform: translateX(5px);
+}
+
+.ant-list-item a {
+    color: #333;
+    text-decoration: none;
+    transition: color 0.3s ease;
+}
+
+.ant-list-item a:hover {
+    color: #008181;
+}
+
+/* 聊天界面样式 */
+.chat-card {
+    display: flex;
+    flex-direction: column;
+    height: 600px;
+    position: relative;
+}
+
+.lawyer-select {
+    padding: 10px;
+    border-bottom: 1px solid #f0f0f0;
+    flex-shrink: 0;
+    background: white;
+    z-index: 2;
+}
+
+.chat-messages {
+    position: absolute;
+    top: 80px;
+    /* 选择框的高度 */
+    bottom: 80px;
+    /* 输入框的高度 */
+    left: 0;
+    right: 0;
+    overflow-y: auto;
+    padding: 15px;
+    background: #f9f9f9;
+}
+
+.message {
+    display: flex;
+    margin-bottom: 12px;
+    align-items: flex-start;
+}
+
+.message.system {
+    justify-content: center;
+    color: #666;
+    font-style: italic;
+}
+
+.message.self {
+    flex-direction: row;
+    justify-content: flex-end;
+}
+
+.message.other {
+    flex-direction: row;
+}
+
+.message-content {
+    max-width: 70%;
+    padding: 8px 12px;
+    border-radius: 8px;
+    margin: 0 8px;
+    word-break: break-word;
+}
+
+.message-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 4px;
+    font-size: 12px;
+}
+
+.message-sender {
+    font-weight: bold;
+    color: #666;
+}
+
+.message-time {
+    color: #999;
+    font-size: 11px;
+}
+
+.message-text {
+    line-height: 1.4;
+}
+
+.message.self .message-content {
+    background: #008181;
+    color: white;
+}
+
+.message.self .message-header {
+    color: rgba(255, 255, 255, 0.8);
+}
+
+.message.other .message-content {
+    background: #f0f0f0;
+    color: #333;
+}
+
+.chat-input {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    padding: 10px;
+    background: white;
+    border-top: 1px solid #f0f0f0;
+    display: flex;
+    gap: 8px;
+    z-index: 2;
+}
+
+.chat-input .ant-input {
+    border-radius: 4px;
+}
+
+.send-button {
+    background: #008181;
+    border-color: #008181;
+}
+
+.send-button:hover {
+    background: #00a0a0;
+    border-color: #00a0a0;
+}
+
+/* 用户选择下拉框样式 */
+.ant-select-selector {
+    border-radius: 4px !important;
+}
+
+.ant-select-focused .ant-select-selector {
+    border-color: #008181 !important;
+    box-shadow: 0 0 0 2px rgba(0, 129, 129, 0.2) !important;
+}
+
+.ant-select-item-option-selected {
+    background-color: #e6f7f7 !important;
+}
+
+.ant-select-item-option-active {
+    background-color: #f5f5f5 !important;
+}
+
+.section-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 20px;
+}
+
+.delete-button {
+    color: #ff4d4f;
+}
+
+.delete-button:hover {
+    color: #ff7875;
+    background: rgba(255, 77, 79, 0.1);
 }

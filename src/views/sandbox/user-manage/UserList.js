@@ -57,26 +57,8 @@ export default function UserList() {
 
     const columns = [
         {
-            title: '擅长领域',
-            dataIndex: 'region',
-            filters: [
-                ...regionList.map(item => ({
-                    text: item.title,
-                    value: item.value
-                })), {
-                    text: '全领域',
-                    value: '全领域'
-                }
-            ],
-            onFilter: (value, item) => {
-                if (value === '全领域') {
-                    return item.region === '';
-                }
-                return item.region === value;
-            },
-            render: (region) => {
-                return <b>{region === '' ? '全领域' : region}</b>;
-            }
+            title: '用户名',
+            dataIndex: 'username',
         },
         {
             title: '角色名称',
@@ -84,10 +66,6 @@ export default function UserList() {
             render: (role) => {
                 return role?.roleName;
             }
-        },
-        {
-            title: '用户名',
-            dataIndex: 'username',
         },
         {
             title: '用户状态',

@@ -5,6 +5,7 @@ import axios from 'axios';
 import * as Echarts from 'echarts';
 import _ from 'lodash';
 import helpImage from '../../pics/help.jpg';
+import ChatBox from '../../../components/ChatBox';
 
 const { Meta } = Card;
 
@@ -17,7 +18,7 @@ export default function Home() {
     const barRef = useRef();
     const pieRef = useRef();
 
-    const { username, region, role: { roleName } } = JSON.parse(localStorage.getItem('token'));
+    const { username, region, role: { roleName }, id } = JSON.parse(localStorage.getItem('token'));
 
     useEffect(() => {
         axios.get("/news?publishState=2&_expand=category&_sort=view&_order=desc&_limit=7").then(res => {
@@ -143,7 +144,11 @@ export default function Home() {
         <div className="site-card-wrapper">
             <Row gutter={16}>
                 <Col span={8}>
-                    <Card title="用户最常浏览" bordered={true}>
+                    <Card 
+                        title="用户最常浏览" 
+                        bordered={true}
+                        headStyle={{ backgroundColor: '#008181', color: 'white' }}
+                    >
                         <List
                             size="small"
                             dataSource={viewList}
@@ -152,7 +157,11 @@ export default function Home() {
                     </Card>
                 </Col>
                 <Col span={8}>
-                    <Card title="用户最多点赞" bordered={true}>
+                    <Card 
+                        title="用户最多点赞" 
+                        bordered={true}
+                        headStyle={{ backgroundColor: '#008181', color: 'white' }}
+                    >
                         <List
                             size="small"
                             dataSource={starList}
@@ -193,6 +202,9 @@ export default function Home() {
                 <div ref={pieRef} style={{ width: "100%", height: "400px", marginTop: "30px" }}></div>
             </Drawer>
             <div ref={barRef} style={{ width: "100%", height: "400px", marginTop: "30px" }}></div>
+
+            {/* 添加聊天框组件 */}
+            {roleName === '律师' && <ChatBox lawyerId={id} />}
         </div>
     );
 }

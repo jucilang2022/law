@@ -1,0 +1,224 @@
+.lawyer-chat-box {
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
+    width: 350px;
+    height: 500px;
+    z-index: 1000;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+    border-radius: 8px;
+    display: flex;
+    flex-direction: column;
+    transition: all 0.3s ease;
+    user-select: none;
+}
+
+.lawyer-chat-box .ant-card-head {
+    background: linear-gradient(135deg, #008181 0%, #00a0a0 100%);
+    color: white;
+    border-radius: 8px 8px 0 0;
+    padding: 12px 16px;
+    flex-shrink: 0;
+    cursor: grab;
+}
+
+.lawyer-chat-box .ant-card-head:active {
+    cursor: grabbing;
+}
+
+.minimize-button {
+    color: white !important;
+}
+
+.minimize-button:hover {
+    color: rgba(255, 255, 255, 0.8) !important;
+}
+
+.minimized-chat {
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
+    width: 50px;
+    height: 50px;
+    background: #008181;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+    transition: all 0.3s ease;
+    z-index: 1000;
+    user-select: none;
+}
+
+.minimized-chat:hover {
+    transform: scale(1.1);
+    background: #00a0a0;
+}
+
+.chat-icon {
+    font-size: 24px;
+    color: white;
+}
+
+.unread-badge {
+    position: absolute;
+    top: -5px;
+    right: -5px;
+    background: #ff4d4f;
+    color: white;
+    border-radius: 10px;
+    padding: 2px 6px;
+    font-size: 12px;
+    min-width: 20px;
+    text-align: center;
+}
+
+.lawyer-chat-box .ant-card-body {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    padding: 0;
+    height: calc(100% - 57px);
+    /* 减去头部高度 */
+    overflow: hidden;
+}
+
+.user-select {
+    padding: 10px;
+    border-bottom: 1px solid #f0f0f0;
+    background: white;
+    z-index: 2;
+    flex-shrink: 0;
+}
+
+.lawyer-chat-messages {
+    margin-top: 55px;
+}
+
+.chat-messages {
+    flex: 1;
+    overflow-y: auto;
+    padding: 15px;
+    background: #f9f9f9;
+    display: flex;
+    flex-direction: column;
+    min-height: 0;
+}
+
+.message {
+    display: flex;
+    margin-bottom: 12px;
+    align-items: flex-start;
+}
+
+.message.system {
+    justify-content: center;
+    color: #666;
+    font-style: italic;
+}
+
+/* 用户消息样式 */
+.message.other {
+    flex-direction: row;
+}
+
+/* 律师消息样式 */
+.message.self {
+    flex-direction: row;
+    justify-content: flex-end;
+}
+
+.message-content {
+    max-width: 70%;
+    padding: 8px 12px;
+    border-radius: 8px;
+    margin: 0 8px;
+    word-break: break-word;
+}
+
+.message-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 4px;
+    font-size: 12px;
+}
+
+.message-sender {
+    font-weight: bold;
+    color: #666;
+}
+
+.message-time {
+    color: #999;
+    font-size: 11px;
+}
+
+.message-text {
+    line-height: 1.4;
+}
+
+/* 用户消息样式 */
+.message.other .message-content {
+    background: #f0f0f0;
+    color: #333;
+}
+
+/* 律师消息样式 */
+.message.self .message-content {
+    background: #008181;
+    color: white;
+}
+
+.message.self .message-header {
+    color: rgba(255, 255, 255, 0.8);
+}
+
+.chat-input {
+    padding: 10px;
+    background: white;
+    border-top: 1px solid #f0f0f0;
+    display: flex;
+    gap: 8px;
+    z-index: 2;
+    flex-shrink: 0;
+}
+
+.chat-input .ant-input {
+    border-radius: 4px;
+}
+
+.send-button {
+    background: #008181;
+    border-color: #008181;
+}
+
+.send-button:hover {
+    background: #00a0a0;
+    border-color: #00a0a0;
+}
+
+/* 用户选择下拉框样式 */
+.ant-select-selector {
+    border-radius: 4px !important;
+}
+
+.ant-select-focused .ant-select-selector {
+    border-color: #008181 !important;
+    box-shadow: 0 0 0 2px rgba(0, 129, 129, 0.2) !important;
+}
+
+.ant-select-item-option-selected {
+    background-color: #e6f7f7 !important;
+}
+
+.ant-select-item-option-active {
+    background-color: #f5f5f5 !important;
+}
+
+/* 确保下拉框在顶层 */
+.ant-select-dropdown {
+    z-index: 1100 !important;
+}

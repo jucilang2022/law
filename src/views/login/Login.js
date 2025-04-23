@@ -5,18 +5,38 @@ import ParticlesBg from 'particles-bg';
 import axios from 'axios';
 import './Login.css';
 export default function Login(props) {
+  const [isLogin, setIsLogin] = React.useState(true);
+
   const onFinish = (values) => {
-    // console.log(values)
-    axios.get(`http://localhost:5000/users?username=${values.username}&password=${values.password}&roleState=true&_expand=role`).then(res => {
-      // console.log(res.data)
-      if (res.data.length === 0) {
-        message.error('用户名或密码错误！');
-      } else {
-        localStorage.setItem('token', JSON.stringify(res.data[0]))
-        props.history.push('/')
-      }
-    })
+    if (isLogin) {
+      axios.get(`http://localhost:5000/users/?username=${values.username}&password=${values.password}&roleState=true&_expand=role`).then(res => {
+        if (res.data.length === 0) {
+          message.error('用户名或密码错误！');
+        } else {
+          localStorage.setItem('token', JSON.stringify(res.data[0]))
+          props.history.push('/')
+        }
+      })
+    } else {
+      axios.get(`http://localhost:5000/users?username=${values.username}`).then(res => {
+        if (res.data.length > 0) {
+          message.error('用户名已存在！');
+        } else {
+          axios.post('http://localhost:5000/users', {
+            username: values.username,
+            password: values.password,
+            roleState: true,
+            default: true,
+            roleId: 3
+          }).then(res => {
+            message.success('注册成功！');
+            setIsLogin(true);
+          })
+        }
+      })
+    }
   }
+
   return (
     <div>
       <ParticlesBg type="circle" bg={true} />
@@ -55,7 +75,14 @@ export default function Login(props) {
           </Form.Item>
           <Form.Item>
             <Button type="primary" htmlType="submit" className="login-form-button">
-              登录
+              {isLogin ? '登录' : '注册'}
+            </Button>
+            <Button
+              type="link"
+              onClick={() => setIsLogin(!isLogin)}
+              style={{ marginTop: '10px' }}
+            >
+              {isLogin ? '没有账号？去注册' : '已有账号？去登录'}
             </Button>
           </Form.Item>
         </Form>
