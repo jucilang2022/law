@@ -1,0 +1,249 @@
+.legal-map-container {
+    padding: 24px;
+    background-color: #f0f2f5;
+    min-height: calc(100vh - 64px);
+}
+
+.map-card {
+    height: 100%;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+    margin-bottom: 24px;
+}
+
+.map-header {
+    display: flex;
+    align-items: center;
+    margin-bottom: 16px;
+    position: relative;
+}
+
+.back-button {
+    position: absolute;
+    left: -18px;
+    top: 0;
+    height: 32px;
+    line-height: 32px;
+}
+
+.location-info {
+    margin-left: auto;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    color: #666;
+    font-size: 14px;
+}
+
+.map-content {
+    position: relative;
+    height: calc(100vh - 200px);
+    min-height: 500px;
+}
+
+.map-container {
+    width: 100%;
+    height: 100%;
+    border-radius: 8px;
+    overflow: hidden;
+}
+
+.map-loading {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background: rgba(255, 255, 255, 0.8);
+    z-index: 1000;
+}
+
+.info-card {
+    height: 100%;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+}
+
+.info-section {
+    height: 100%;
+    overflow-y: auto;
+}
+
+.legal-stats-section {
+    margin-bottom: 24px;
+}
+
+.legal-stats-section .ant-card {
+    text-align: center;
+    transition: all 0.3s;
+}
+
+.legal-stats-section .ant-card:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+}
+
+.legal-services-section {
+    margin-top: 24px;
+}
+
+.service-card {
+    margin-bottom: 16px;
+    transition: all 0.3s;
+}
+
+.service-card:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+}
+
+.service-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 12px;
+}
+
+.service-header h5 {
+    margin: 0;
+}
+
+.service-content {
+    color: #666;
+}
+
+.service-content p {
+    margin: 8px 0;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.service-content .anticon {
+    color: #1890ff;
+}
+
+/* 响应式布局 */
+@media screen and (max-width: 1200px) {
+    .legal-map-container {
+        padding: 16px;
+    }
+
+    .map-content {
+        height: calc(100vh - 180px);
+    }
+}
+
+@media screen and (max-width: 768px) {
+    .legal-map-container {
+        padding: 12px;
+    }
+
+    .map-content {
+        height: 400px;
+    }
+
+    .map-header {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 8px;
+    }
+
+    .location-info {
+        width: 100%;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        white-space: nowrap;
+    }
+}
+
+/* 自定义地图标记样式 */
+.amap-marker-content {
+    background: #1890ff;
+    color: #fff;
+    padding: 4px 8px;
+    border-radius: 4px;
+    font-size: 12px;
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
+}
+
+/* 自定义信息窗体样式 */
+.amap-info-content {
+    padding: 12px;
+    border-radius: 8px;
+    box-shadow: 0 2px 12px rgba(0, 0, 0, 0.1);
+    min-width: 200px;
+}
+
+.amap-info-title {
+    font-size: 16px;
+    font-weight: 500;
+    color: #1a1a1a;
+    margin-bottom: 8px;
+    padding-bottom: 8px;
+    border-bottom: 1px solid #f0f0f0;
+}
+
+.amap-info-body {
+    font-size: 14px;
+    color: #666;
+    line-height: 1.6;
+}
+
+.amap-info-body p {
+    margin: 4px 0;
+}
+
+/* 搜索结果数量提示 */
+.results-count {
+    padding: 8px 16px;
+    background: #f5f7fa;
+    border-bottom: 1px solid #f0f0f0;
+    color: #666;
+    font-size: 14px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.results-count .anticon {
+    color: #1890ff;
+    margin-right: 8px;
+}
+
+/* 自定义定位按钮样式 */
+.amap-geolocation-control {
+    background: #fff !important;
+    border-radius: 4px !important;
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1) !important;
+}
+
+.amap-geolocation-control .amap-geolocation-con {
+    border: none !important;
+}
+
+/* 自定义搜索框样式 */
+.amap-searchbox {
+    border-radius: 4px !important;
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1) !important;
+}
+
+.amap-searchbox-input {
+    border: none !important;
+    padding: 8px 12px !important;
+}
+
+.amap-searchbox-button {
+    background: #1890ff !important;
+    border: none !important;
+    color: #fff !important;
+    padding: 8px 16px !important;
+}
+
+/* 确保地图容器正确显示 */
+#container {
+    width: 100%;
+    height: 100%;
+    position: relative;
+}

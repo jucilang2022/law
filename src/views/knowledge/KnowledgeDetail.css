@@ -1,0 +1,385 @@
+.knowledge-detail-layout {
+    min-height: 100vh;
+    background-color: #f5f7fa;
+}
+
+.knowledge-detail-header {
+    background: #fff;
+    padding: 16px 24px;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.06);
+    position: sticky;
+    top: 0;
+    z-index: 100;
+}
+
+.header-content {
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+.knowledge-detail-content {
+    padding: 24px;
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+.knowledge-detail-card {
+    background: #fff;
+    border-radius: 8px;
+    box-shadow: 0 2px 12px rgba(0, 0, 0, 0.08);
+    margin-bottom: 24px;
+}
+
+.knowledge-header {
+    padding: 24px;
+    border-bottom: 1px solid #f0f0f0;
+}
+
+.knowledge-header h2 {
+    color: #1a1a1a;
+    margin-bottom: 16px;
+    font-size: 28px;
+    font-weight: 600;
+}
+
+.knowledge-meta {
+    margin-bottom: 16px;
+    color: #666;
+    font-size: 14px;
+}
+
+.knowledge-stats {
+    margin-bottom: 16px;
+    color: #666;
+    font-size: 14px;
+}
+
+.knowledge-stats span {
+    margin-right: 24px;
+    display: inline-flex;
+    align-items: center;
+}
+
+.knowledge-stats .anticon {
+    margin-right: 4px;
+    color: #1890ff;
+}
+
+.knowledge-tags {
+    margin-bottom: 16px;
+}
+
+.knowledge-tags .ant-tag {
+    margin-right: 8px;
+    padding: 4px 12px;
+    border-radius: 4px;
+    font-size: 13px;
+}
+
+.knowledge-actions {
+    padding: 16px 24px;
+    background: #fafafa;
+    border-radius: 0 0 8px 8px;
+}
+
+.knowledge-content {
+    padding: 24px;
+    line-height: 1.8;
+    color: #333;
+    font-size: 15px;
+}
+
+.knowledge-content h2 {
+    color: #1a1a1a;
+    font-size: 24px;
+    margin: 32px 0 16px;
+    padding-bottom: 12px;
+    border-bottom: 2px solid #1890ff;
+}
+
+.knowledge-content h3 {
+    color: #262626;
+    font-size: 20px;
+    margin: 24px 0 16px;
+    font-weight: 500;
+}
+
+.knowledge-content p {
+    margin-bottom: 16px;
+    color: #4a4a4a;
+}
+
+.knowledge-content ul {
+    margin-bottom: 16px;
+    padding-left: 24px;
+}
+
+.knowledge-content li {
+    margin-bottom: 8px;
+    color: #4a4a4a;
+}
+
+.knowledge-content ul ul {
+    margin-top: 8px;
+    margin-bottom: 8px;
+}
+
+.knowledge-footer {
+    padding: 24px;
+    text-align: center;
+    border-top: 1px solid #f0f0f0;
+}
+
+/* 添加卡片悬浮效果 */
+.knowledge-detail-card:hover {
+    box-shadow: 0 4px 16px rgba(0, 0, 0, 0.12);
+    transform: translateY(-2px);
+    transition: all 0.3s ease;
+}
+
+/* 添加按钮样式 */
+.knowledge-actions .ant-btn {
+    height: 36px;
+    padding: 0 20px;
+    border-radius: 4px;
+    font-size: 14px;
+    display: inline-flex;
+    align-items: center;
+}
+
+.knowledge-actions .ant-btn .anticon {
+    margin-right: 8px;
+}
+
+/* 添加面包屑导航样式 */
+.ant-breadcrumb {
+    font-size: 14px;
+}
+
+.ant-breadcrumb-link {
+    color: #1890ff;
+}
+
+.ant-breadcrumb-separator {
+    color: #999;
+}
+
+/* 添加加载动画样式 */
+.loading-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 400px;
+}
+
+/* 添加响应式设计 */
+@media screen and (max-width: 768px) {
+    .knowledge-detail-content {
+        padding: 16px;
+    }
+
+    .knowledge-header {
+        padding: 16px;
+    }
+
+    .knowledge-header h2 {
+        font-size: 24px;
+    }
+
+    .knowledge-content {
+        padding: 16px;
+        font-size: 14px;
+    }
+
+    .knowledge-content h2 {
+        font-size: 20px;
+    }
+
+    .knowledge-content h3 {
+        font-size: 18px;
+    }
+
+    .knowledge-actions {
+        padding: 12px 16px;
+    }
+
+    .knowledge-actions .ant-btn {
+        height: 32px;
+        padding: 0 16px;
+        font-size: 13px;
+    }
+}
+
+/* 添加打印样式 */
+@media print {
+
+    .knowledge-detail-header,
+    .knowledge-actions,
+    .knowledge-footer {
+        display: none;
+    }
+
+    .knowledge-detail-content {
+        padding: 0;
+    }
+
+    .knowledge-detail-card {
+        box-shadow: none;
+        border: none;
+    }
+
+    .knowledge-content {
+        padding: 0;
+    }
+}
+
+/* 添加代码块样式 */
+.knowledge-content pre {
+    background: #f6f8fa;
+    padding: 16px;
+    border-radius: 6px;
+    overflow-x: auto;
+    margin: 16px 0;
+}
+
+.knowledge-content code {
+    font-family: 'SFMono-Regular', Consolas, 'Liberation Mono', Menlo, Courier, monospace;
+    font-size: 13px;
+    color: #24292e;
+}
+
+/* 添加表格样式 */
+.knowledge-content table {
+    width: 100%;
+    border-collapse: collapse;
+    margin: 16px 0;
+}
+
+.knowledge-content th,
+.knowledge-content td {
+    padding: 12px;
+    border: 1px solid #e8e8e8;
+    text-align: left;
+}
+
+.knowledge-content th {
+    background: #fafafa;
+    font-weight: 500;
+}
+
+.knowledge-content tr:nth-child(even) {
+    background: #fafafa;
+}
+
+/* 添加引用块样式 */
+.knowledge-content blockquote {
+    margin: 16px 0;
+    padding: 12px 16px;
+    border-left: 4px solid #1890ff;
+    background: #f0f7ff;
+    color: #1a1a1a;
+}
+
+/* 添加图片样式 */
+.knowledge-content img {
+    max-width: 100%;
+    height: auto;
+    border-radius: 4px;
+    margin: 16px 0;
+}
+
+/* 添加分割线样式 */
+.knowledge-content hr {
+    margin: 24px 0;
+    border: none;
+    border-top: 1px solid #e8e8e8;
+}
+
+/* 添加标签样式 */
+.knowledge-content .tag-list {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+    margin: 16px 0;
+}
+
+.knowledge-content .tag-item {
+    padding: 4px 12px;
+    background: #f0f7ff;
+    color: #1890ff;
+    border-radius: 4px;
+    font-size: 13px;
+}
+
+/* 添加提示框样式 */
+.knowledge-content .tip-box {
+    margin: 16px 0;
+    padding: 16px;
+    background: #fffbe6;
+    border: 1px solid #ffe58f;
+    border-radius: 4px;
+}
+
+.knowledge-content .tip-box-title {
+    color: #d48806;
+    font-weight: 500;
+    margin-bottom: 8px;
+}
+
+.knowledge-content .tip-box-content {
+    color: #666;
+}
+
+/* 添加步骤样式 */
+.knowledge-content .step-list {
+    counter-reset: step;
+    margin: 16px 0;
+}
+
+.knowledge-content .step-item {
+    position: relative;
+    padding-left: 32px;
+    margin-bottom: 16px;
+}
+
+.knowledge-content .step-item::before {
+    counter-increment: step;
+    content: counter(step);
+    position: absolute;
+    left: 0;
+    top: 0;
+    width: 24px;
+    height: 24px;
+    background: #1890ff;
+    color: #fff;
+    border-radius: 50%;
+    text-align: center;
+    line-height: 24px;
+    font-size: 14px;
+}
+
+/* 添加卡片网格样式 */
+.knowledge-content .card-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 16px;
+    margin: 16px 0;
+}
+
+.knowledge-content .card-item {
+    padding: 16px;
+    background: #fafafa;
+    border-radius: 4px;
+    border: 1px solid #f0f0f0;
+}
+
+.knowledge-content .card-title {
+    font-weight: 500;
+    margin-bottom: 8px;
+    color: #1a1a1a;
+}
+
+.knowledge-content .card-content {
+    color: #666;
+    font-size: 14px;
+}

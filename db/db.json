@@ -17,7 +17,7 @@
       "roleState": "true",
       "default": false,
       "id": 9,
-      "chatInfo": "[{\"type\":\"lawyer\",\"content\":\"/chat_images/1745408271653-36429306.jpg\",\"timestamp\":\"2025-04-23T11:37:51.661Z\",\"userId\":13,\"lawyerId\":9,\"messageType\":\"image\"},{\"type\":\"lawyer\",\"content\":\"看看这个\",\"timestamp\":\"2025-04-23T11:37:58.790Z\",\"userId\":13,\"lawyerId\":9},{\"type\":\"user\",\"content\":\"好看啊，太好看了\",\"timestamp\":\"2025-04-23T11:39:28.485Z\",\"userId\":11,\"lawyerId\":9},{\"type\":\"lawyer\",\"content\":\"我也觉得特别好看\",\"timestamp\":\"2025-04-23T11:44:34.171Z\",\"userId\":13,\"lawyerId\":9}]"
+      "chatInfo": "[{\"type\":\"lawyer\",\"content\":\"/chat_images/1745408271653-36429306.jpg\",\"timestamp\":\"2025-04-23T11:37:51.661Z\",\"userId\":13,\"lawyerId\":9,\"messageType\":\"image\"},{\"type\":\"lawyer\",\"content\":\"看看这个\",\"timestamp\":\"2025-04-23T11:37:58.790Z\",\"userId\":13,\"lawyerId\":9},{\"type\":\"user\",\"content\":\"好看啊，太好看了\",\"timestamp\":\"2025-04-23T11:39:28.485Z\",\"userId\":11,\"lawyerId\":9},{\"type\":\"lawyer\",\"content\":\"我也觉得特别好看\",\"timestamp\":\"2025-04-23T11:44:34.171Z\",\"userId\":13,\"lawyerId\":9},{\"type\":\"user\",\"content\":\"是的\",\"timestamp\":\"2025-05-10T18:04:00.851Z\",\"userId\":12,\"lawyerId\":9},{\"type\":\"user\",\"content\":\"/chat_images/1746900576807-459797201.png\",\"timestamp\":\"2025-05-10T18:09:36.848Z\",\"userId\":12,\"lawyerId\":9,\"messageType\":\"image\"},{\"type\":\"lawyer\",\"content\":\"花里胡哨\",\"timestamp\":\"2025-05-10T18:09:53.453Z\",\"userId\":12,\"lawyerId\":9},{\"type\":\"user\",\"content\":\"/chat_audio/1746943933277-984226962.wav\",\"timestamp\":\"2025-05-11T06:12:13.294Z\",\"userId\":14,\"lawyerId\":9,\"messageType\":\"audio\"}]"
     },
     {
       "username": "wang",
@@ -54,6 +54,14 @@
       "default": true,
       "roleId": 3,
       "id": 13
+    },
+    {
+      "username": "1234",
+      "password": "1234",
+      "roleState": true,
+      "default": true,
+      "roleId": 3,
+      "id": 14
     }
   ],
   "roles": [
@@ -1129,8 +1137,8 @@
       "auditState": 2,
       "publishState": 2,
       "createTime": 1742996849454,
-      "star": 19,
-      "view": 20010,
+      "star": 23,
+      "view": 20016,
       "id": 57,
       "publishTime": 1742996872494
     },
@@ -1144,8 +1152,8 @@
       "auditState": 2,
       "publishState": 2,
       "createTime": 1742997138428,
-      "star": 9,
-      "view": 12,
+      "star": 11,
+      "view": 13,
       "id": 58,
       "publishTime": 1742997145714
     },
@@ -1279,7 +1287,7 @@
       "publishState": 2,
       "createTime": 1745382617720,
       "star": 0,
-      "view": 1,
+      "view": 2,
       "id": 67,
       "publishTime": 1745382623245
     },
@@ -1324,9 +1332,18 @@
       "publishState": 2,
       "createTime": 1745382813364,
       "star": 0,
-      "view": 2,
+      "view": 3,
       "id": 70,
-      "publishTime": 1745382843249
+      "publishTime": 1745382843249,
+      "comments": [
+        {
+          "id": 1746945975479,
+          "content": "长知识了！",
+          "author": "1234",
+          "timestamp": "2025-05-11T06:46:15.479Z",
+          "userId": 14
+        }
+      ]
     },
     {
       "title": "离婚后房产代持人拒不配合过户引发的确权执行异议之诉",
@@ -1338,7 +1355,7 @@
       "auditState": 2,
       "publishState": 2,
       "createTime": 1745382838353,
-      "star": 0,
+      "star": 3,
       "view": 0,
       "id": 71,
       "publishTime": 1745382843740
@@ -1368,7 +1385,7 @@
       "auditState": 2,
       "publishState": 2,
       "createTime": 1745382942782,
-      "star": 0,
+      "star": 2,
       "view": 5,
       "id": 73,
       "publishTime": 1745382946927
@@ -1386,7 +1403,16 @@
       "star": 0,
       "view": 0,
       "id": 74,
-      "publishTime": 1745383078120
+      "publishTime": 1745383078120,
+      "comments": [
+        {
+          "id": 1746943198228,
+          "content": "不过",
+          "author": "123",
+          "timestamp": "2025-05-11T05:59:58.228Z",
+          "userId": 12
+        }
+      ]
     },
     {
       "title": "药品专利链接诉讼中化合物晶型专利侵权案",
@@ -1398,7 +1424,7 @@
       "auditState": 2,
       "publishState": 2,
       "createTime": 1745383067774,
-      "star": 0,
+      "star": 19,
       "view": 0,
       "id": 75,
       "publishTime": 1745383078625
@@ -1414,7 +1440,7 @@
       "publishState": 2,
       "createTime": 1745383226796,
       "star": 0,
-      "view": 4,
+      "view": 5,
       "id": 76,
       "publishTime": 1745383231499
     },

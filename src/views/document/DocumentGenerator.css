@@ -1,0 +1,92 @@
+.document-generator-layout {
+    min-height: 100vh;
+    background: #f0f2f5;
+}
+
+.document-generator-header {
+    background: #fff;
+    padding: 0 24px;
+    display: flex;
+    align-items: center;
+    position: relative;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+    height: 64px;
+}
+
+.back-button1 {
+    position: absolute;
+    left: 10px;
+    top: 0;
+    height: 64px;
+    line-height: 64px;
+    z-index: 1;
+    color: #9fd1ff !important;
+}
+
+.document-generator-header .ant-typography {
+    margin: 0 auto;
+    position: relative;
+    z-index: 0;
+}
+
+.document-generator-content {
+    padding: 24px;
+}
+
+.search-filter-section {
+    margin-bottom: 24px;
+    display: flex;
+    align-items: center;
+}
+
+.template-list {
+    margin-top: 24px;
+}
+
+.template-card {
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    transition: all 0.3s;
+}
+
+.template-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+}
+
+.template-icon {
+    font-size: 32px;
+    color: #1890ff;
+    margin-bottom: 16px;
+    text-align: center;
+}
+
+.template-description {
+    color: #666;
+    margin: 12px 0;
+    flex-grow: 1;
+}
+
+.generate-button {
+    width: 100%;
+    margin-top: 16px;
+}
+
+/* 响应式布局 */
+@media (max-width: 768px) {
+    .template-list .ant-col {
+        width: 100%;
+    }
+
+    .search-filter-section {
+        flex-direction: column;
+        align-items: stretch;
+    }
+
+    .search-filter-section .ant-input,
+    .search-filter-section .ant-select {
+        width: 100% !important;
+        margin-bottom: 16px;
+    }
+}
