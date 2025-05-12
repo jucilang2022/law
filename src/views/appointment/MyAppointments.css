@@ -1,0 +1,150 @@
+.my-appointments-container {
+    padding: 24px;
+    background-color: #f0f2f5;
+    min-height: 100vh;
+}
+
+.appointments-header {
+    display: flex;
+    align-items: center;
+    margin-bottom: 24px;
+}
+
+.back-button {
+    margin-right: 16px;
+    font-size: 16px;
+}
+
+.back-button:hover {
+    color: #1890ff;
+}
+
+.statistics-row {
+    margin-bottom: 24px;
+}
+
+.statistic-card {
+    text-align: center;
+    transition: all 0.3s;
+}
+
+.statistic-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+}
+
+.appointments-card {
+    background: #fff;
+    border-radius: 8px;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.06);
+}
+
+.appointment-item {
+    margin-bottom: 16px;
+    transition: all 0.3s;
+}
+
+.appointment-item:hover {
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+}
+
+.appointment-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 12px;
+}
+
+.lawyer-info {
+    display: flex;
+    align-items: center;
+}
+
+.lawyer-icon {
+    font-size: 24px;
+    margin-right: 12px;
+    color: #1890ff;
+}
+
+.lawyer-specialty {
+    display: block;
+    margin-top: 4px;
+}
+
+.appointment-tags {
+    display: flex;
+    gap: 8px;
+}
+
+.appointment-content {
+    margin-top: 12px;
+}
+
+.appointment-time {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    margin-bottom: 8px;
+    color: #666;
+}
+
+.appointment-description {
+    color: #666;
+    margin-top: 8px;
+}
+
+.appointment-actions {
+    margin-top: 12px;
+    display: flex;
+    justify-content: flex-end;
+}
+
+.appointments-loading {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 400px;
+}
+
+/* 预约详情弹窗样式 */
+.appointment-details {
+    padding: 16px;
+}
+
+.detail-item {
+    display: flex;
+    align-items: center;
+    margin-bottom: 16px;
+}
+
+.detail-item strong {
+    width: 100px;
+    color: #666;
+}
+
+/* 空状态样式 */
+.ant-empty {
+    padding: 40px 0;
+}
+
+/* 时间轴样式 */
+.ant-timeline-item-content {
+    margin-left: 28px;
+}
+
+/* 响应式布局 */
+@media screen and (max-width: 768px) {
+    .statistics-row .ant-col {
+        width: 100%;
+        margin-bottom: 16px;
+    }
+
+    .appointment-header {
+        flex-direction: column;
+        align-items: flex-start;
+    }
+
+    .appointment-tags {
+        margin-top: 12px;
+    }
+}

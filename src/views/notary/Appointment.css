@@ -1,0 +1,105 @@
+.appointment-container {
+    padding: 24px;
+    max-width: 1200px;
+    margin: 0 auto;
+    min-height: calc(100vh - 64px);
+    background: #f0f2f5;
+}
+
+.appointment-card {
+    background: #fff;
+    border-radius: 8px;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+}
+
+.appointment-steps {
+    margin-bottom: 24px;
+}
+
+.lawyer-selection {
+    padding: 24px 0;
+}
+
+.lawyer-card-wrapper {
+    cursor: pointer;
+    transition: all 0.3s;
+    border-radius: 8px;
+    overflow: hidden;
+}
+
+.lawyer-card-wrapper:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+}
+
+.lawyer-card-wrapper.selected {
+    border: 2px solid #1890ff;
+}
+
+.lawyer-card {
+    border: none;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+}
+
+.lawyer-info {
+    display: flex;
+    align-items: center;
+    padding: 16px;
+}
+
+.lawyer-details {
+    margin-left: 16px;
+    flex: 1;
+}
+
+.lawyer-tags {
+    margin-top: 8px;
+}
+
+.lawyer-tags .ant-tag {
+    margin-right: 8px;
+    margin-bottom: 8px;
+}
+
+.appointment-form {
+    padding: 24px 0;
+}
+
+.step-actions {
+    margin-top: 24px;
+    text-align: center;
+}
+
+.step-actions .ant-btn {
+    margin: 0 8px;
+}
+
+.appointment-confirmation {
+    text-align: center;
+    padding: 48px 0;
+}
+
+.confirmation-icon {
+    margin-bottom: 24px;
+}
+
+.appointment-confirmation .ant-typography {
+    margin-bottom: 16px;
+}
+
+/* 响应式调整 */
+@media (max-width: 768px) {
+    .appointment-container {
+        padding: 16px;
+    }
+
+    .lawyer-info {
+        flex-direction: column;
+        text-align: center;
+    }
+
+    .lawyer-details {
+        margin-left: 0;
+        margin-top: 16px;
+    }
+}

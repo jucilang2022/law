@@ -292,9 +292,10 @@ body .main-header {
 
 .section-header {
     display: flex;
-    align-items: center;
     justify-content: space-between;
-    margin-bottom: 20px;
+    align-items: center;
+    width: 100%;
+    padding: 4px 0;
 }
 
 .delete-button {
@@ -1020,16 +1021,9 @@ body {
     margin-top: auto !important;
 }
 
-/* 案件信息样式优化 */
-.case-section {
-    background: linear-gradient(135deg, #ffffff 0%, #f8f9fa 100%) !important;
-    padding: 24px !important;
-    border-radius: 12px !important;
-    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.05) !important;
-}
-
+/* 案件信息卡片样式优化 */
 .case-card {
-    background: #fff !important;
+    background: linear-gradient(135deg, #ffffff 0%, #f8f9fa 100%) !important;
     border-radius: 12px !important;
     overflow: hidden !important;
     transition: all 0.3s ease !important;
@@ -1042,37 +1036,71 @@ body {
     box-shadow: 0 8px 24px rgba(0, 0, 0, 0.08) !important;
 }
 
-.case-card .ant-card-head {
-    background: linear-gradient(135deg, #008181 0%, #00a0a0 100%) !important;
-    border-radius: 12px 12px 0 0 !important;
-    padding: 16px 20px !important;
+.case-card-header {
+    display: flex !important;
+    align-items: center !important;
+    gap: 12px !important;
+    padding: 4px 0 !important;
 }
 
-.case-card .ant-card-head-title {
-    color: #fff !important;
+.case-category-icon {
+    font-size: 24px !important;
+    color: #008181 !important;
+    background: rgba(0, 129, 129, 0.1) !important;
+    padding: 8px !important;
+    border-radius: 8px !important;
+    display: flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+}
+
+.case-category-title {
     font-size: 18px !important;
     font-weight: 600 !important;
+    color: #333 !important;
 }
 
-.case-card .ant-list-item {
-    padding: 12px 20px !important;
+.case-list-item {
+    padding: 16px !important;
     border-bottom: 1px solid #f0f0f0 !important;
     transition: all 0.3s ease !important;
 }
 
-.case-card .ant-list-item:hover {
+.case-list-item:hover {
     background: #f8f9fa !important;
-    padding-left: 24px !important;
+    padding-left: 20px !important;
 }
 
-.case-card .ant-list-item a {
+.case-item-content {
+    width: 100% !important;
+}
+
+.case-item-title {
+    margin-bottom: 8px !important;
+}
+
+.case-item-title a {
     color: #333 !important;
     font-size: 15px !important;
+    font-weight: 500 !important;
     transition: all 0.3s ease !important;
 }
 
-.case-card .ant-list-item a:hover {
+.case-item-title a:hover {
     color: #008181 !important;
+}
+
+.case-item-meta {
+    display: flex !important;
+    align-items: center !important;
+    gap: 8px !important;
+}
+
+.case-item-meta .ant-tag {
+    margin: 0 !important;
+    padding: 4px 8px !important;
+    border-radius: 4px !important;
+    font-size: 12px !important;
 }
 
 /* 法律资讯样式优化 */
@@ -1106,12 +1134,47 @@ body {
     align-items: center !important;
 }
 
+.news-tag {
+    display: inline-flex !important;
+    align-items: center !important;
+    gap: 4px !important;
+    padding: 4px 12px !important;
+    border-radius: 4px !important;
+    font-size: 13px !important;
+    font-weight: 500 !important;
+}
+
+.news-date {
+    display: flex !important;
+    align-items: center !important;
+    gap: 4px !important;
+    font-size: 13px !important;
+}
+
+.news-content {
+    padding: 20px !important;
+}
+
 .news-title {
-    padding: 16px 20px !important;
     font-size: 16px !important;
     font-weight: 600 !important;
     color: #333 !important;
+    margin-bottom: 12px !important;
     line-height: 1.6 !important;
+}
+
+.news-stats {
+    display: flex !important;
+    align-items: center !important;
+    gap: 16px !important;
+    color: #666 !important;
+    font-size: 13px !important;
+}
+
+.news-stats span {
+    display: flex !important;
+    align-items: center !important;
+    gap: 4px !important;
 }
 
 .news-footer {
@@ -1120,25 +1183,19 @@ body {
     text-align: right !important;
 }
 
-.news-footer .ant-btn-link {
+.news-more-btn {
     color: #008181 !important;
     font-weight: 500 !important;
+    padding: 4px 0 !important;
 }
 
-.news-footer .ant-btn-link:hover {
+.news-more-btn:hover {
     color: #00a0a0 !important;
 }
 
 /* 法律工具样式优化 */
-.legal-tools {
-    padding: 24px !important;
-    background: linear-gradient(135deg, #ffffff 0%, #f8f9fa 100%) !important;
-    border-radius: 12px !important;
-    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.05) !important;
-}
-
 .tool-card {
-    background: #fff !important;
+    background: linear-gradient(135deg, #ffffff 0%, #f8f9fa 100%) !important;
     border-radius: 12px !important;
     overflow: hidden !important;
     transition: all 0.3s ease !important;
@@ -1185,101 +1242,468 @@ body {
     line-height: 1.6 !important;
 }
 
-/* 法律知识库样式优化 */
-.knowledge-base {
-    padding: 24px !important;
+/* 日历卡片样式 */
+.calendar-card {
     background: linear-gradient(135deg, #ffffff 0%, #f8f9fa 100%) !important;
-    border-radius: 12px !important;
-    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.05) !important;
-}
-
-.knowledge-base .ant-tabs-nav {
-    margin-bottom: 24px !important;
-    border-bottom: 2px solid #f0f0f0 !important;
-}
-
-.knowledge-base .ant-tabs-tab {
-    padding: 12px 24px !important;
-    font-size: 16px !important;
-    transition: all 0.3s ease !important;
-}
-
-.knowledge-base .ant-tabs-tab-active {
-    font-weight: 600 !important;
-}
-
-.knowledge-base .ant-tabs-ink-bar {
-    background: #008181 !important;
-    height: 3px !important;
-}
-
-.knowledge-card {
-    background: #fff !important;
     border-radius: 12px !important;
     overflow: hidden !important;
     transition: all 0.3s ease !important;
     border: none !important;
     box-shadow: 0 2px 12px rgba(0, 0, 0, 0.04) !important;
-    padding: 20px !important;
-    height: 100% !important;
-    position: relative !important;
-    overflow: hidden !important;
+    margin-top: 24px !important;
 }
 
-.knowledge-card::before {
-    content: '' !important;
-    position: absolute !important;
-    top: 0 !important;
-    left: 0 !important;
-    width: 4px !important;
-    height: 100% !important;
-    background: linear-gradient(to bottom, #008181, #00a0a0) !important;
-    opacity: 0 !important;
-    transition: all 0.3s ease !important;
+.calendar-header {
+    display: flex !important;
+    align-items: center !important;
+    gap: 12px !important;
+    padding: 16px 20px !important;
+    border-bottom: 1px solid #f0f0f0 !important;
 }
 
-.knowledge-card:hover {
-    transform: translateY(-5px) !important;
-    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.08) !important;
+.calendar-icon {
+    font-size: 24px !important;
+    color: #008181 !important;
+    background: rgba(0, 129, 129, 0.1) !important;
+    padding: 8px !important;
+    border-radius: 8px !important;
+    display: flex !important;
+    align-items: center !important;
+    justify-content: center !important;
 }
 
-.knowledge-card:hover::before {
-    opacity: 1 !important;
-}
-
-.knowledge-title {
-    font-size: 16px !important;
+.calendar-title {
+    font-size: 18px !important;
     font-weight: 600 !important;
     color: #333 !important;
-    margin-bottom: 8px !important;
-    padding-left: 12px !important;
 }
 
-.knowledge-category {
-    display: inline-block !important;
-    padding: 4px 12px !important;
-    background: rgba(0, 129, 129, 0.1) !important;
-    color: #008181 !important;
-    border-radius: 4px !important;
-    font-size: 13px !important;
-    font-weight: 500 !important;
+.calendar-card .ant-picker-calendar {
+    padding: 16px !important;
 }
 
-/* 标签页通用样式优化 */
-.ant-tabs-content {
-    background: transparent !important;
+.calendar-card .ant-picker-calendar-header {
     padding: 0 !important;
+    margin-bottom: 16px !important;
 }
 
-.ant-tabs-tab {
+.calendar-card .ant-picker-panel {
+    border: none !important;
+    background: transparent !important;
+}
+
+.calendar-card .ant-picker-cell {
+    padding: 4px !important;
+}
+
+.calendar-card .ant-picker-calendar-date {
+    margin: 0 !important;
+    padding: 4px !important;
+    border-radius: 8px !important;
     transition: all 0.3s ease !important;
 }
 
-.ant-tabs-tab:hover {
-    color: #008181 !important;
+.calendar-card .ant-picker-calendar-date:hover {
+    background: rgba(0, 129, 129, 0.1) !important;
 }
 
-.ant-tabs-tab-active .ant-tabs-tab-btn {
+.calendar-card .ant-picker-calendar-date-value {
+    font-size: 14px !important;
+    color: #333 !important;
+}
+
+.calendar-card .ant-picker-calendar-date-today .ant-picker-calendar-date-value {
     color: #008181 !important;
     font-weight: 600 !important;
+}
+
+.event-dot {
+    width: 6px !important;
+    height: 6px !important;
+    background: #008181 !important;
+    border-radius: 50% !important;
+    margin: 2px auto 0 !important;
+    transition: all 0.3s ease !important;
+}
+
+.calendar-card .ant-picker-calendar-date:hover .event-dot {
+    transform: scale(1.2) !important;
+}
+
+.event-popover {
+    min-width: 200px !important;
+}
+
+.event-popover .event-title {
+    font-size: 14px !important;
+    font-weight: 500 !important;
+    color: #333 !important;
+    margin-bottom: 4px !important;
+}
+
+.event-popover .event-date {
+    font-size: 12px !important;
+    color: #666 !important;
+}
+
+/* 调整日历在移动端的显示 */
+@media (max-width: 768px) {
+    .calendar-card {
+        margin-top: 16px !important;
+    }
+
+    .calendar-card .ant-picker-calendar {
+        padding: 8px !important;
+    }
+
+    .calendar-card .ant-picker-calendar-date {
+        padding: 2px !important;
+    }
+
+    .calendar-card .ant-picker-calendar-date-value {
+        font-size: 12px !important;
+    }
+}
+
+/* 返回按钮样式 */
+.back-button {
+    color: #333 !important;
+    font-size: 14px !important;
+    padding: 4px 8px !important;
+    margin-right: 16px !important;
+    display: flex !important;
+    align-items: center !important;
+    gap: 4px !important;
+    transition: all 0.3s ease !important;
+}
+
+.back-button:hover {
+    color: #008181 !important;
+    background: rgba(0, 129, 129, 0.1) !important;
+}
+
+.back-button .anticon {
+    font-size: 16px !important;
+}
+
+/* 页面头部样式 */
+.appointment-header,
+.case-progress-header,
+.knowledge-detail-header .header-left {
+    display: flex !important;
+    align-items: center !important;
+    margin-bottom: 24px !important;
+}
+
+/* 确保返回按钮在深色背景上可见 */
+.knowledge-detail-header .back-button {
+    color: #fff !important;
+}
+
+.knowledge-detail-header .back-button:hover {
+    color: #fff !important;
+    background: rgba(255, 255, 255, 0.1) !important;
+}
+
+/* 调整标题样式 */
+.appointment-header .ant-typography,
+.case-progress-header .ant-typography {
+    margin: 0 !important;
+}
+
+/* 确保返回按钮和标题之间有适当间距 */
+.appointment-header .ant-typography,
+.case-progress-header .ant-typography {
+    margin-left: 16px !important;
+}
+
+/* 响应式调整 */
+@media (max-width: 768px) {
+    .back-button {
+        padding: 2px 4px !important;
+        margin-right: 8px !important;
+    }
+
+    .back-button span {
+        display: none !important;
+    }
+
+    .back-button .anticon {
+        margin-right: 0 !important;
+    }
+}
+
+.hot-topics-section {
+    margin-bottom: 24px;
+    border-radius: 8px;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+}
+
+.hot-topics-section .ant-card-head {
+    background-color: #00a0a0;
+    border-radius: 8px 8px 0 0;
+    padding: 12px 24px;
+}
+
+.hot-topics-section .ant-card-head-title {
+    color: white;
+    padding: 0;
+}
+
+.section-title-wrapper {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+}
+
+.section-icon {
+    font-size: 20px;
+    color: white;
+    display: flex;
+    align-items: center;
+}
+
+.section-title {
+    font-size: 18px;
+    font-weight: 500;
+    color: white;
+    margin: 0;
+    line-height: 1;
+}
+
+.section-subtitle {
+    font-size: 14px;
+    color: rgba(255, 255, 255, 0.85);
+    margin: 0;
+    line-height: 1;
+}
+
+.qa-item {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+}
+
+.question {
+    font-size: 16px;
+    font-weight: 500;
+    color: #333;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    cursor: pointer;
+    padding: 16px;
+    border-radius: 8px;
+    transition: all 0.3s ease;
+    background: #f8f9fa;
+}
+
+.question:hover {
+    background: #f0f0f0;
+}
+
+.question-text {
+    flex: 1;
+}
+
+.expand-icon {
+    color: #1890ff;
+    font-size: 14px;
+    padding: 4px 8px;
+    border-radius: 4px;
+    background: rgba(24, 144, 255, 0.1);
+}
+
+.answer {
+    font-size: 14px;
+    color: #666;
+    line-height: 1.8;
+    display: flex;
+    align-items: flex-start;
+    gap: 12px;
+    padding: 20px;
+    margin: 0 12px;
+    background: #fff;
+    border-radius: 8px;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+    animation: slideDown 0.3s ease-out;
+}
+
+.answer-text {
+    flex: 1;
+}
+
+.answer-text p {
+    margin: 0 0 12px 0;
+}
+
+.answer-text p:last-child {
+    margin-bottom: 0;
+}
+
+@keyframes slideDown {
+    from {
+        opacity: 0;
+        transform: translateY(-10px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.q-tag,
+.a-tag {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 24px;
+    height: 24px;
+    border-radius: 50%;
+    font-size: 12px;
+    font-weight: bold;
+    flex-shrink: 0;
+}
+
+.q-tag {
+    background-color: #1890ff;
+    color: white;
+}
+
+.a-tag {
+    background-color: #52c41a;
+    color: white;
+}
+
+.qa-meta {
+    margin-top: 8px;
+    padding: 0 12px;
+}
+
+/* 响应式调整 */
+@media screen and (max-width: 768px) {
+    .section-title {
+        font-size: 18px;
+    }
+
+    .section-icon {
+        font-size: 20px;
+    }
+
+    .question {
+        font-size: 15px;
+        padding: 12px;
+    }
+
+    .answer {
+        font-size: 13px;
+        padding: 16px;
+        margin: 0 8px;
+    }
+
+    .q-tag,
+    .a-tag {
+        width: 20px;
+        height: 20px;
+        font-size: 11px;
+    }
+
+    .expand-icon {
+        font-size: 12px;
+        padding: 2px 6px;
+    }
+}
+
+/* 法律咨询模块样式 */
+.legal-consultations {
+    padding: 20px;
+}
+
+.create-consultation-btn {
+    margin-bottom: 20px;
+}
+
+.consultation-card {
+    margin-bottom: 16px;
+    transition: all 0.3s;
+}
+
+.consultation-card:hover {
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+}
+
+.consultation-header {
+    margin-bottom: 12px;
+}
+
+.consultation-meta {
+    margin-top: 8px;
+}
+
+.consultation-content {
+    margin-top: 16px;
+}
+
+.consultation-description {
+    font-size: 14px;
+    line-height: 1.6;
+    color: #333;
+    white-space: pre-wrap;
+}
+
+.comments-section {
+    margin-top: 20px;
+}
+
+.comment-item {
+    padding: 12px 0;
+    border-bottom: 1px solid #f0f0f0;
+}
+
+.comment-header {
+    display: flex;
+    align-items: center;
+    margin-bottom: 8px;
+}
+
+.comment-username {
+    margin: 0 8px;
+    font-weight: 500;
+}
+
+.comment-time {
+    margin-left: auto;
+    color: #999;
+    font-size: 12px;
+}
+
+.comment-content {
+    margin-left: 40px;
+    color: #333;
+    line-height: 1.5;
+}
+
+.comment-input-section {
+    margin-top: 20px;
+    padding: 16px;
+    background: #f9f9f9;
+    border-radius: 4px;
+}
+
+/* 响应式布局 */
+@media screen and (max-width: 768px) {
+    .consultation-card {
+        margin-bottom: 12px;
+    }
+
+    .comment-header {
+        flex-wrap: wrap;
+    }
+
+    .comment-time {
+        margin-left: 0;
+        margin-top: 4px;
+        width: 100%;
+    }
 }

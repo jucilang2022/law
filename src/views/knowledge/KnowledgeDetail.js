@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { useParams, useHistory } from 'react-router-dom';
+import { useParams, useHistory, useLocation } from 'react-router-dom';
 import {
     Layout, Typography, Card, Breadcrumb, Button, Space,
     Divider, Tag, Rate, Tooltip, message, Spin
@@ -7,7 +7,7 @@ import {
 import {
     HomeOutlined, BookOutlined, DownloadOutlined,
     StarOutlined, ShareAltOutlined, PrinterOutlined,
-    EyeOutlined, LikeOutlined, MessageOutlined
+    EyeOutlined, LikeOutlined, MessageOutlined, ArrowLeftOutlined
 } from '@ant-design/icons';
 import './KnowledgeDetail.css';
 
@@ -1206,6 +1206,7 @@ const knowledgeData = {
 export default function KnowledgeDetail() {
     const { id } = useParams();
     const history = useHistory();
+    const location = useLocation();
     const [loading, setLoading] = useState(true);
     const [knowledge, setKnowledge] = useState(null);
 
@@ -1239,15 +1240,27 @@ export default function KnowledgeDetail() {
         <Layout className="knowledge-detail-layout">
             <Header className="knowledge-detail-header">
                 <div className="header-content">
-                    <Breadcrumb>
-                        <Breadcrumb.Item href="/news">
-                            <HomeOutlined /> 首页
-                        </Breadcrumb.Item>
-                        <Breadcrumb.Item href="/news#4">
-                            <BookOutlined /> 法律知识库
-                        </Breadcrumb.Item>
-                        <Breadcrumb.Item>{knowledge.title}</Breadcrumb.Item>
-                    </Breadcrumb>
+                    <div className="header-left">
+                        {location.state?.showBackButton && (
+                            <Button
+                                type="text"
+                                icon={<ArrowLeftOutlined />}
+                                onClick={() => history.goBack()}
+                                className="back-button"
+                            >
+                                返回
+                            </Button>
+                        )}
+                        <Breadcrumb>
+                            <Breadcrumb.Item href="/news">
+                                <HomeOutlined /> 首页
+                            </Breadcrumb.Item>
+                            <Breadcrumb.Item href="/news#4">
+                                <BookOutlined /> 法律知识库
+                            </Breadcrumb.Item>
+                            <Breadcrumb.Item>{knowledge.title}</Breadcrumb.Item>
+                        </Breadcrumb>
+                    </div>
                 </div>
             </Header>
 

@@ -1,0 +1,43 @@
+.header-right {
+    float: right;
+    display: flex;
+    align-items: center;
+    height: 100%;
+}
+
+.header-right .ant-space {
+    display: flex;
+    align-items: center;
+}
+
+.header-right .ant-avatar {
+    cursor: pointer;
+    background-color: #1890ff;
+}
+
+.header-right .ant-dropdown-menu {
+    min-width: 160px;
+}
+
+.header-right .ant-dropdown-menu-item {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    padding: 8px 16px;
+}
+
+.header-right .ant-dropdown-menu-item .anticon {
+    font-size: 16px;
+}
+
+.header-right .ant-dropdown-menu-item-danger {
+    color: #ff4d4f !important;
+}
+
+.header-right .ant-dropdown-menu-item-danger:hover {
+    background-color: #fff1f0;
+}
+
+.header-right .ant-dropdown-menu-item-danger .anticon {
+    color: #ff4d4f !important;
+}

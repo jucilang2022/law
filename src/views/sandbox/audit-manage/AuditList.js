@@ -72,7 +72,7 @@ export default function AuditList(props) {
       props.history.push('/publish-manage/published')
       notification.info({
         message: `通知`,
-        description: `您可以到[发布管理/已发布]中重新编辑该案件`,
+        description: `您可以到[信息管理/已发布]中重新编辑该案件`,
         placement: 'bottomRight',
       });
     })

@@ -20,7 +20,7 @@ function usePublish(type) {
         }).then(res => {
             notification.info({
                 message: `通知`,
-                description: `您可以到[发布管理/已发布]中查看该案件`,
+                description: `您可以到[信息管理/已发布]中查看该案件`,
                 placement: 'bottomRight',
             });
         })
@@ -33,7 +33,7 @@ function usePublish(type) {
         }).then(res => {
             notification.info({
                 message: `通知`,
-                description: `您可以到[发布管理/已下线]中查看该案件`,
+                description: `您可以到[信息管理/已下线]中查看该案件`,
                 placement: 'bottomRight',
             });
         })

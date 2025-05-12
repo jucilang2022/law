@@ -8,7 +8,41 @@ import './NewsSandBox.css'
 
 import { Layout } from 'antd';
 import NewsRouter from '../../components/sandbox/NewsRouter';
+import { HomeOutlined, UserOutlined, FileTextOutlined, AuditOutlined, EditOutlined, CalendarOutlined } from '@ant-design/icons';
 const { Content } = Layout;
+
+const menuList = [
+    {
+        key: '/home',
+        icon: <HomeOutlined />,
+        label: '首页'
+    },
+    {
+        key: '/user-manage',
+        icon: <UserOutlined />,
+        label: '用户管理'
+    },
+    {
+        key: '/case-manage',
+        icon: <FileTextOutlined />,
+        label: '案件管理'
+    },
+    {
+        key: '/case-audit',
+        icon: <AuditOutlined />,
+        label: '案件审核'
+    },
+    {
+        key: '/publish-manage',
+        icon: <EditOutlined />,
+        label: '信息管理'
+    },
+    {
+        key: '/appointment-manage',
+        icon: <CalendarOutlined />,
+        label: '预约管理'
+    }
+];
 
 export default function NewsSandBox() {
     NProgress.start()

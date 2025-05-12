@@ -17,7 +17,9 @@
       "roleState": "true",
       "default": false,
       "id": 9,
-      "chatInfo": "[{\"type\":\"lawyer\",\"content\":\"/chat_images/1745408271653-36429306.jpg\",\"timestamp\":\"2025-04-23T11:37:51.661Z\",\"userId\":13,\"lawyerId\":9,\"messageType\":\"image\"},{\"type\":\"lawyer\",\"content\":\"看看这个\",\"timestamp\":\"2025-04-23T11:37:58.790Z\",\"userId\":13,\"lawyerId\":9},{\"type\":\"user\",\"content\":\"好看啊，太好看了\",\"timestamp\":\"2025-04-23T11:39:28.485Z\",\"userId\":11,\"lawyerId\":9},{\"type\":\"lawyer\",\"content\":\"我也觉得特别好看\",\"timestamp\":\"2025-04-23T11:44:34.171Z\",\"userId\":13,\"lawyerId\":9},{\"type\":\"user\",\"content\":\"是的\",\"timestamp\":\"2025-05-10T18:04:00.851Z\",\"userId\":12,\"lawyerId\":9},{\"type\":\"user\",\"content\":\"/chat_images/1746900576807-459797201.png\",\"timestamp\":\"2025-05-10T18:09:36.848Z\",\"userId\":12,\"lawyerId\":9,\"messageType\":\"image\"},{\"type\":\"lawyer\",\"content\":\"花里胡哨\",\"timestamp\":\"2025-05-10T18:09:53.453Z\",\"userId\":12,\"lawyerId\":9},{\"type\":\"user\",\"content\":\"/chat_audio/1746943933277-984226962.wav\",\"timestamp\":\"2025-05-11T06:12:13.294Z\",\"userId\":14,\"lawyerId\":9,\"messageType\":\"audio\"}]"
+      "chatInfo": "[{\"type\":\"lawyer\",\"content\":\"/chat_images/1745408271653-36429306.jpg\",\"timestamp\":\"2025-04-23T11:37:51.661Z\",\"userId\":13,\"lawyerId\":9,\"messageType\":\"image\"},{\"type\":\"lawyer\",\"content\":\"看看这个\",\"timestamp\":\"2025-04-23T11:37:58.790Z\",\"userId\":13,\"lawyerId\":9},{\"type\":\"user\",\"content\":\"好看啊，太好看了\",\"timestamp\":\"2025-04-23T11:39:28.485Z\",\"userId\":11,\"lawyerId\":9},{\"type\":\"lawyer\",\"content\":\"我也觉得特别好看\",\"timestamp\":\"2025-04-23T11:44:34.171Z\",\"userId\":13,\"lawyerId\":9},{\"type\":\"user\",\"content\":\"是的\",\"timestamp\":\"2025-05-10T18:04:00.851Z\",\"userId\":12,\"lawyerId\":9},{\"type\":\"user\",\"content\":\"/chat_images/1746900576807-459797201.png\",\"timestamp\":\"2025-05-10T18:09:36.848Z\",\"userId\":12,\"lawyerId\":9,\"messageType\":\"image\"},{\"type\":\"lawyer\",\"content\":\"花里胡哨\",\"timestamp\":\"2025-05-10T18:09:53.453Z\",\"userId\":12,\"lawyerId\":9},{\"type\":\"user\",\"content\":\"/chat_audio/1746943933277-984226962.wav\",\"timestamp\":\"2025-05-11T06:12:13.294Z\",\"userId\":14,\"lawyerId\":9,\"messageType\":\"audio\"},{\"type\":\"user\",\"content\":\"hh\",\"timestamp\":\"2025-05-12T02:37:56.999Z\",\"userId\":12,\"lawyerId\":9}]",
+      "appointments": "[{\"id\":1746956422972,\"name\":\"王强\",\"phone\":\"15502921536\",\"appointmentType\":\"online\",\"date\":\"2025-05-18T09:40:19.090Z\",\"time\":\"09:30\",\"description\":\"不知道\",\"userId\":12,\"lawyerId\":9,\"status\":\"confirmed\",\"createTime\":\"2025-05-11T09:40:22.972Z\"},{\"id\":1746956742550,\"name\":\"王强\",\"phone\":\"15502921536\",\"appointmentType\":\"offline\",\"date\":\"2025-05-14T09:45:28.784Z\",\"time\":\"10:30\",\"description\":\"gg\",\"address\":\"的\",\"userId\":12,\"lawyerId\":9,\"status\":\"cancelled\",\"createTime\":\"2025-05-11T09:45:42.550Z\"},{\"id\":1746982706470,\"name\":\"王晓\",\"phone\":\"13222222222\",\"appointmentType\":\"online\",\"date\":\"2025-05-26T16:58:21.196Z\",\"time\":\"12:00\",\"description\":\"王晓\",\"userId\":12,\"lawyerId\":9,\"status\":\"confirmed\",\"createTime\":\"2025-05-11T16:58:26.470Z\"}]",
+      "cases": "[{\"id\":\"1746959878313\",\"appointmentId\":1746956422972,\"caseNumber\":\"110120130\",\"title\":\"王强案\",\"type\":\"civil\",\"description\":\"一些需求\",\"status\":\"completed\",\"createTime\":\"2025-05-11T10:37:58.313Z\",\"updateTime\":\"2025-05-11T10:38:35.570Z\",\"lawyerId\":9}]"
     },
     {
       "username": "wang",
@@ -346,7 +348,7 @@
     },
     {
       "id": 24,
-      "title": "发布管理",
+      "title": "信息管理",
       "key": "/publish-manage",
       "pagepermisson": 1,
       "grade": 1
@@ -382,6 +384,11 @@
       "id": 6,
       "title": "刑事诉讼",
       "value": "刑事诉讼"
+    },
+    {
+      "id": 7,
+      "title": "法律咨询",
+      "value": "法律咨询"
     }
   ],
   "regions": [
@@ -1457,7 +1464,122 @@
       "star": 24,
       "view": 3,
       "id": 77,
-      "publishTime": 1745383322141
+      "publishTime": 1745383322141,
+      "comments": [
+        {
+          "id": 1747021207857,
+          "content": "请看看",
+          "author": "admin",
+          "timestamp": "2025-05-12T03:40:07.857Z",
+          "userId": 1
+        },
+        {
+          "id": 1747021374138,
+          "content": "所示",
+          "author": "admin",
+          "timestamp": "2025-05-12T03:42:54.138Z",
+          "userId": 1
+        },
+        {
+          "id": 1747021526724,
+          "content": "嗯嗯",
+          "author": "admin",
+          "timestamp": "2025-05-12T03:45:26.724Z",
+          "userId": 1
+        }
+      ]
+    },
+    {
+      "title": "画室兼职助教，老板少给工资，多次协商无果后直接拉黑",
+      "content": "画室兼职助教，其中两天半，有给学生上课，做范画，画室老板却不承认我的工作成果，还用我做的范画给学生上课，并以熟悉学生没有工资为由克扣工资。后面一直协商，老板始终不给这份工资，并用多个并未事先说明的理由扣钱，多次协商无果后直接把我拉黑。",
+      "categoryId": 4,
+      "author": "123",
+      "publishState": 2,
+      "createTime": "2025-05-12T03:29:40.144Z",
+      "view": 0,
+      "star": 0,
+      "like": 0,
+      "id": 78
+    },
+    {
+      "title": "房租退租问题",
+      "content": "退租后房东不肯退还押金要怎么办",
+      "categoryId": 4,
+      "author": "123",
+      "publishState": 2,
+      "createTime": "2025-05-12T03:30:24.257Z",
+      "view": 0,
+      "star": 0,
+      "like": 0,
+      "id": 79
+    },
+    {
+      "title": "房租退租问题",
+      "content": "退租后房东不肯退还押金要怎么办",
+      "categoryId": 7,
+      "author": "123",
+      "publishState": 2,
+      "createTime": "2025-05-12T03:37:19.645Z",
+      "view": 0,
+      "star": 0,
+      "like": 0,
+      "id": 80,
+      "comments": [
+        {
+          "id": 1747021608888,
+          "content": "请帮帮我",
+          "userId": 12,
+          "username": "123",
+          "createTime": "2025-05-12T03:46:48.888Z"
+        },
+        {
+          "id": 1747021755843,
+          "content": "您好！《中华人民共和国民法典》第七百零三条 租赁合同是出租人将租赁物交付承租人使用、收益，承租人支付租金的合同。《中华人民共和国民事诉讼法》第三十四条 下列案件，由本条规定的人民法院专属管辖：（一）因不动产纠纷提起的诉讼，由不动产所在地人民法院管辖；（二）因港口作业中发生纠纷提起的诉讼，由港口所在地人民法院管辖；（三）因继承遗产纠纷提起的诉讼，由被继承人死亡时住所地或者主要遗产所在地人民法院管辖。智能化在线法律援助平台为您提供以上信息，仅供您参考。如有疑问，欢迎进一步咨询。感谢您对中国法律服务网的关注和支持！",
+          "userId": 1,
+          "username": "admin",
+          "createTime": "2025-05-12T03:49:15.843Z"
+        },
+        {
+          "id": 1747021830076,
+          "content": "房屋租赁合同纠纷，关于退押金的相关问题，看一下租赁合同押金退还如何约定，依据约定履行，房东不肯协商处理的，可以向法院起诉解决，依法维权，向法院起诉要准备好租房合同等证据。",
+          "userId": 9,
+          "username": "admin1",
+          "createTime": "2025-05-12T03:50:30.076Z"
+        }
+      ]
+    },
+    {
+      "title": "法定节假日加班按最低工资的三倍",
+      "content": "企业在法定节假日给员工排班，并按照最低标准工资发三倍，算合法吗？员工表示难以接受。",
+      "categoryId": 7,
+      "author": "123",
+      "publishState": 2,
+      "createTime": "2025-05-12T03:37:44.207Z",
+      "view": 0,
+      "star": 0,
+      "like": 0,
+      "id": 81
+    },
+    {
+      "title": "没有结婚证 有一个小孩 要退多少彩礼",
+      "content": "没有结婚证 有一个小孩 现在男方要求我 退回七万块钱彩礼钱 拒绝给小孩抚养费",
+      "categoryId": 7,
+      "author": "123",
+      "publishState": 2,
+      "createTime": "2025-05-12T03:56:15.190Z",
+      "view": 0,
+      "star": 0,
+      "like": 0,
+      "id": 82,
+      "comments": [
+        {
+          "id": 1747022248299,
+          "content": "根据《最高人民法院关于适用<中华人民共和国民法典>婚姻家庭编的解释（一）》第五条 当事人请求返还按照习俗给付的彩礼的，如果查明属于以下情形，人民法院应当予以支持：（一）双方未办理结婚登记手续。…，因此，男方要求您退回彩礼的诉求可能会得到法院的支持，但具体返还多少彩礼，会根据双方共同生活时间情况、是否生育子女、彩礼金额及男方家庭经济收入情况、未结婚分手原因等综合确定。智能化在线法律援助平台为您提供以上信息，仅供您参考。如有疑问，欢迎进一步咨询。",
+          "userId": 9,
+          "username": "admin1",
+          "createTime": "2025-05-12T03:57:28.299Z"
+        }
+      ]
     }
   ]
 }

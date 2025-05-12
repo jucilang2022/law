@@ -4,7 +4,8 @@ import _ from 'lodash'
 import {
     Card, Col, Row, List, Layout, Typography, Input, Button, Avatar,
     Select, message, Modal, Upload, Drawer, Menu, Tabs, Carousel,
-    Statistic, Tag, Space, Tooltip, Badge, Divider
+    Statistic, Tag, Space, Tooltip, Badge, Divider, Progress, Rate,
+    Timeline, Alert, Popover, Calendar, Badge as AntBadge, Form
 } from 'antd';
 import {
     SendOutlined, UserOutlined, DeleteOutlined, PictureOutlined,
@@ -12,7 +13,10 @@ import {
     BookOutlined, ToolOutlined, FileTextOutlined, QuestionCircleOutlined,
     CalculatorOutlined, SafetyCertificateOutlined, GlobalOutlined,
     TeamOutlined, BankOutlined, FileSearchOutlined, PhoneOutlined,
-    EnvironmentOutlined, ClockCircleOutlined, RightOutlined
+    EnvironmentOutlined, ClockCircleOutlined, RightOutlined,
+    CalendarOutlined, UploadOutlined, SearchOutlined, StarOutlined,
+    FireOutlined, TrophyOutlined, LikeOutlined, ShareAltOutlined,
+    EyeOutlined, CommentOutlined, HeartOutlined, ThunderboltOutlined
 } from '@ant-design/icons';
 import './News.css'
 import { useHistory } from 'react-router-dom'
@@ -48,7 +52,7 @@ export default function News() {
     const [legalTools, setLegalTools] = useState([
         { id: 1, title: '诉讼费计算器', icon: <CalculatorOutlined />, description: '快速计算各类案件诉讼费用', path: '/calculator' },
         { id: 2, title: '法律文书生成', icon: <FileTextOutlined />, description: '常用法律文书模板下载', path: '/document-generator' },
-        { id: 4, title: '案件进度查询', icon: <FileSearchOutlined />, description: '查询案件审理进度' },
+        { id: 3, title: '案件进度查询', icon: <FileSearchOutlined />, description: '查询案件审理进度', path: '/case-progress' }
     ]);
     const [knowledgeBase, setKnowledgeBase] = useState([
         { id: 1, title: '婚姻家事', category: '民事' },
@@ -58,7 +62,51 @@ export default function News() {
         { id: 5, title: '知识产权', category: '商事' },
         { id: 6, title: '公司治理', category: '商事' },
     ]);
+    const [hotTopics, setHotTopics] = useState([
+        {
+            id: 1,
+            question: '离婚后子女抚养权如何确定？',
+            answer: '根据《民法典》规定，子女抚养权的确定主要考虑以下因素：\n\n1. 子女的年龄、性别、健康状况；\n2. 父母的经济能力、教育水平；\n3. 子女的意愿（8周岁以上）；\n4. 父母与子女的感情基础等。\n\n法院会综合这些因素，以子女利益最大化为原则作出判决。建议在离婚前，双方可以协商确定抚养权，如果协商不成，可以向法院提起诉讼。',
+            category: '婚姻家事'
+        },
+        {
+            id: 2,
+            question: '劳动合同到期不续签需要赔偿吗？',
+            answer: '根据《劳动合同法》规定，劳动合同到期不续签是否需要赔偿，主要看以下情况：\n\n1. 用人单位提出续签但劳动者不同意：无需赔偿；\n2. 用人单位不续签：需要支付经济补偿金；\n3. 劳动者提出不续签：一般无需赔偿。\n\n经济补偿金的计算标准：\n- 工作满一年支付一个月工资；\n- 不满一年按一年计算；\n- 不满半年按半年计算。\n\n建议在劳动合同到期前，双方就续签事宜进行充分沟通，避免产生不必要的纠纷。',
+            category: '劳动纠纷'
+        },
+        {
+            id: 3,
+            question: '交通事故责任如何认定？',
+            answer: '交通事故责任认定主要依据《道路交通安全法》及相关规定，具体考虑以下因素：\n\n1. 当事人的过错程度：\n   - 违反交通信号灯\n   - 超速行驶\n   - 违规变道\n   - 未保持安全距离等\n\n2. 事故现场证据：\n   - 现场照片\n   - 监控录像\n   - 车辆损坏情况\n   - 路面痕迹等\n\n3. 其他重要因素：\n   - 天气状况\n   - 道路条件\n   - 车辆状况\n   - 驾驶员状态等\n\n交警部门会制作事故认定书，明确各方责任。如果对认定结果有异议，可以在收到认定书之日起3日内申请复核。',
+            category: '交通事故'
+        },
+        {
+            id: 4,
+            question: '房屋买卖合同违约如何维权？',
+            answer: '房屋买卖合同违约维权途径如下：\n\n1. 协商和解：\n   - 与对方进行友好协商\n   - 寻求调解机构帮助\n   - 达成和解协议\n\n2. 仲裁：\n   - 向仲裁委员会申请仲裁\n   - 提交相关证据材料\n   - 等待仲裁结果\n\n3. 诉讼：\n   - 向法院提起诉讼\n   - 准备起诉材料\n   - 参加庭审\n\n维权建议：\n1. 及时收集证据：\n   - 合同文本\n   - 付款凭证\n   - 违约证据\n   - 沟通记录等\n\n2. 注意诉讼时效：\n   - 一般诉讼时效为3年\n   - 从知道或应当知道权利被侵害时起算\n\n3. 选择合适方式：\n   - 根据具体情况选择维权途径\n   - 考虑时间成本和费用支出\n   - 评估胜诉可能性',
+            category: '合同纠纷'
+        }
+    ]);
+    const [userStats, setUserStats] = useState({
+        consultationCount: 12,
+        savedArticles: 8,
+        completedTasks: 5
+    });
+    const [events, setEvents] = useState([
+        { date: '2024-03-20', content: '法律讲座：民法典解读' },
+        { date: '2024-03-25', content: '在线法律咨询日' },
+        { date: '2024-04-01', content: '法律援助志愿者培训' }
+    ]);
+    const [showWelcome, setShowWelcome] = useState(true);
     const history = useHistory()
+    const [expandedQuestions, setExpandedQuestions] = useState({});
+    const [consultations, setConsultations] = useState([]);
+    const [isConsultationModalVisible, setIsConsultationModalVisible] = useState(false);
+    const [consultationForm] = Form.useForm();
+    const [commentInputs, setCommentInputs] = useState({});
+    const [comments, setComments] = useState({});
+    const [expandedConsultations, setExpandedConsultations] = useState({});
 
     // 滚动到最新消息
     const scrollToBottom = () => {
@@ -522,6 +570,304 @@ export default function News() {
         setLegalNews(mockNews);
     }, []);
 
+    // 获取咨询列表
+    useEffect(() => {
+        fetchConsultations();
+    }, []);
+
+    const fetchConsultations = async () => {
+        try {
+            const response = await axios.get("/news?publishState=2&_expand=category");
+            // 过滤出法律咨询分类的文章
+            const consultationList = response.data.filter(item => item.categoryId === 7);
+            setConsultations(consultationList);
+        } catch (error) {
+            message.error('获取咨询列表失败');
+        }
+    };
+
+    // 处理新建咨询
+    const handleCreateConsultation = () => {
+        if (!userInfo) {
+            message.warning('请先登录');
+            return;
+        }
+        setIsConsultationModalVisible(true);
+    };
+
+    // 提交咨询
+    const handleSubmitConsultation = async (values) => {
+        try {
+            const newConsultation = {
+                title: values.title,
+                content: values.description,
+                categoryId: 7, // 修改为法律咨询的分类ID
+                author: userInfo.username,
+                publishState: 2, // 已发布状态
+                createTime: new Date().toISOString(),
+                view: 0,
+                star: 0,
+                like: 0
+            };
+
+            await axios.post("/news", newConsultation);
+            message.success('咨询发布成功');
+            setIsConsultationModalVisible(false);
+            consultationForm.resetFields();
+            fetchConsultations();
+        } catch (error) {
+            message.error('发布失败，请重试');
+        }
+    };
+
+    // 获取评论列表
+    const fetchComments = async (consultationId) => {
+        try {
+            const response = await axios.get(`/news/${consultationId}`);
+            // 直接从 news 对象中获取 comments 数组
+            const commentsList = response.data.comments || [];
+            setComments(prev => ({
+                ...prev,
+                [consultationId]: commentsList
+            }));
+        } catch (error) {
+            message.error('获取评论失败');
+        }
+    };
+
+    // 处理评论输入变化
+    const handleCommentChange = (consultationId, value) => {
+        setCommentInputs(prev => ({
+            ...prev,
+            [consultationId]: value
+        }));
+    };
+
+    // 处理评论提交
+    const handleSubmitComment = async (consultationId) => {
+        const commentContent = commentInputs[consultationId];
+        if (!commentContent?.trim()) {
+            message.warning('请输入评论内容');
+            return;
+        }
+
+        try {
+            // 获取当前咨询的评论列表
+            const response = await axios.get(`/news/${consultationId}`);
+            const currentComments = response.data.comments || [];
+
+            // 创建新评论
+            const newComment = {
+                id: Date.now(), // 临时ID
+                content: commentContent,
+                userId: userInfo.id,
+                username: userInfo.username,
+                createTime: new Date().toISOString()
+            };
+
+            // 更新咨询的评论列表
+            await axios.patch(`/news/${consultationId}`, {
+                comments: [...currentComments, newComment]
+            });
+
+            message.success('评论发布成功');
+            // 清空当前咨询的评论输入
+            setCommentInputs(prev => ({
+                ...prev,
+                [consultationId]: ''
+            }));
+            // 重新获取评论列表
+            await fetchComments(consultationId);
+        } catch (error) {
+            message.error('评论发布失败');
+        }
+    };
+
+    // 切换咨询展开状态时获取评论
+    const toggleConsultation = async (id) => {
+        setExpandedConsultations(prev => ({
+            ...prev,
+            [id]: !prev[id]
+        }));
+        // 如果展开，则获取评论
+        if (!expandedConsultations[id]) {
+            await fetchComments(id);
+        }
+    };
+
+    // 获取用户角色标签
+    const getUserRoleTag = (userId) => {
+        // 从 lawyers 数组中查找用户是否为律师
+        const isLawyer = lawyers.some(lawyer => lawyer.id === userId);
+
+        if (userId === 1) {
+            return { color: 'red', text: '管理员' };
+        } else if (isLawyer) {
+            return { color: 'blue', text: '律师' };
+        } else {
+            return { color: 'green', text: '用户' };
+        }
+    };
+
+    // 渲染法律咨询模块
+    const renderLegalConsultations = () => (
+        <div className="legal-consultations">
+            {userInfo?.roleId === 3 && (
+                <Button
+                    type="primary"
+                    icon={<MessageOutlined />}
+                    onClick={handleCreateConsultation}
+                    className="create-consultation-btn"
+                    style={{ marginBottom: 20 }}
+                >
+                    新建咨询
+                </Button>
+            )}
+
+            <Row gutter={[16, 16]}>
+                {consultations.map(consultation => (
+                    <Col span={12} key={consultation.id}>
+                        <Card
+                            className="consultation-card"
+                            hoverable
+                            onClick={() => toggleConsultation(consultation.id)}
+                        >
+                            <div className="consultation-header">
+                                <Title level={5} style={{ marginBottom: 8 }}>{consultation.title}</Title>
+                                <div className="consultation-meta">
+                                    <Space>
+                                        <Tag color="blue">
+                                            <UserOutlined /> {consultation.author}
+                                        </Tag>
+                                        <Tag color="green">
+                                            <ClockCircleOutlined /> {new Date(consultation.createTime).toLocaleString()}
+                                        </Tag>
+                                    </Space>
+                                </div>
+                            </div>
+
+                            {expandedConsultations[consultation.id] && (
+                                <div
+                                    className="consultation-content"
+                                    onClick={(e) => e.stopPropagation()}
+                                >
+                                    <div className="consultation-description" style={{ fontSize: '16px', lineHeight: '1.8' }}>
+                                        {consultation.content}
+                                    </div>
+
+                                    <Divider />
+
+                                    <div className="comments-section">
+                                        <Title level={5}>评论 ({comments[consultation.id]?.length || 0})</Title>
+                                        <List
+                                            dataSource={comments[consultation.id] || []}
+                                            renderItem={comment => {
+                                                const roleInfo = getUserRoleTag(comment.userId);
+                                                const isLawyer = lawyers.some(lawyer => lawyer.id === comment.userId);
+                                                return (
+                                                    <List.Item>
+                                                        <div className="comment-item">
+                                                            <div className="comment-header">
+                                                                <Avatar
+                                                                    icon={
+                                                                        comment.userId === 1 ? <SafetyCertificateOutlined /> :
+                                                                            isLawyer ? <BankOutlined /> :
+                                                                                <UserOutlined />
+                                                                    }
+                                                                    style={{
+                                                                        backgroundColor:
+                                                                            comment.userId === 1 ? '#f5222d' :
+                                                                                isLawyer ? '#1890ff' :
+                                                                                    '#87d068'
+                                                                    }}
+                                                                />
+                                                                <span className="comment-username">{comment.username}</span>
+                                                                <Tag color={roleInfo.color}>
+                                                                    {roleInfo.text}
+                                                                </Tag>
+                                                                <span className="comment-time">
+                                                                    {new Date(comment.createTime).toLocaleString()}
+                                                                </span>
+                                                            </div>
+                                                            <div className="comment-content">
+                                                                {comment.content}
+                                                            </div>
+                                                        </div>
+                                                    </List.Item>
+                                                );
+                                            }}
+                                        />
+
+                                        {userInfo && (
+                                            <div className="comment-input-section">
+                                                <Input.TextArea
+                                                    value={commentInputs[consultation.id] || ''}
+                                                    onChange={e => handleCommentChange(consultation.id, e.target.value)}
+                                                    placeholder="请输入您的评论..."
+                                                    rows={3}
+                                                    onClick={(e) => e.stopPropagation()}
+                                                />
+                                                <Button
+                                                    type="primary"
+                                                    onClick={(e) => {
+                                                        e.stopPropagation();
+                                                        handleSubmitComment(consultation.id);
+                                                    }}
+                                                    style={{ marginTop: 10 }}
+                                                >
+                                                    发表评论
+                                                </Button>
+                                            </div>
+                                        )}
+                                    </div>
+                                </div>
+                            )}
+                        </Card>
+                    </Col>
+                ))}
+            </Row>
+
+            {/* 新建咨询的模态框 */}
+            <Modal
+                title="新建法律咨询"
+                open={isConsultationModalVisible}
+                onCancel={() => setIsConsultationModalVisible(false)}
+                footer={null}
+            >
+                <Form
+                    form={consultationForm}
+                    onFinish={handleSubmitConsultation}
+                    layout="vertical"
+                >
+                    <Form.Item
+                        name="title"
+                        label="咨询标题"
+                        rules={[{ required: true, message: '请输入咨询标题' }]}
+                    >
+                        <Input placeholder="请输入咨询标题" />
+                    </Form.Item>
+
+                    <Form.Item
+                        name="description"
+                        label="咨询内容"
+                        rules={[{ required: true, message: '请输入咨询内容' }]}
+                    >
+                        <Input.TextArea
+                            placeholder="请详细描述您的问题..."
+                            rows={6}
+                        />
+                    </Form.Item>
+
+                    <Form.Item>
+                        <Button type="primary" htmlType="submit">
+                            发布咨询
+                        </Button>
+                    </Form.Item>
+                </Form>
+            </Modal>
+        </div>
+    );
+
     // 渲染快速服务导航
     const renderQuickServices = () => (
         <div className="quick-service-section">
@@ -535,24 +881,68 @@ export default function News() {
                     </Card>
                 </Col>
                 <Col span={6}>
-                    <Card hoverable className="quick-service-card">
-                        <TeamOutlined className="quick-service-icon" />
-                        <div className="quick-service-title-text">律师咨询</div>
-                        <div className="quick-service-desc">一对一专业解答</div>
-                    </Card>
-                </Col>
-                <Col span={6}>
-                    <Card hoverable className="quick-service-card">
+                    <Card
+                        hoverable
+                        className="quick-service-card"
+                        onClick={() => {
+                            const token = localStorage.getItem('token');
+                            if (!token) {
+                                message.warning('请先登录');
+                                return;
+                            }
+                            const userInfo = JSON.parse(token);
+                            if (userInfo.roleId !== 3) {
+                                message.warning('只有普通用户可以预约服务');
+                                return;
+                            }
+                            history.push({
+                                pathname: '/notary/appointment',
+                                state: { showBackButton: true }
+                            });
+                        }}
+                    >
                         <BankOutlined className="quick-service-icon" />
-                        <div className="quick-service-title-text">公证服务</div>
-                        <div className="quick-service-desc">在线预约办理</div>
+                        <div className="quick-service-title-text">预约服务</div>
+                        <div className="quick-service-desc">办理在线预约</div>
                     </Card>
                 </Col>
                 <Col span={6}>
                     <Card
                         hoverable
                         className="quick-service-card"
-                        onClick={() => history.push('/legal-map')}
+                        onClick={() => {
+                            const token = localStorage.getItem('token');
+                            if (!token) {
+                                message.warning('请先登录');
+                                return;
+                            }
+                            const userInfo = JSON.parse(token);
+                            if (userInfo.role.roleName === '用户') {
+                                history.push({
+                                    pathname: '/appointment/my',
+                                    state: { showBackButton: true }
+                                });
+                            } else {
+                                history.push({
+                                    pathname: '/appointment-manage',
+                                    state: { showBackButton: true }
+                                });
+                            }
+                        }}
+                    >
+                        <TeamOutlined className="quick-service-icon" />
+                        <div className="quick-service-title-text">我的预约</div>
+                        <div className="quick-service-desc">查看预约记录</div>
+                    </Card>
+                </Col>
+                <Col span={6}>
+                    <Card
+                        hoverable
+                        className="quick-service-card"
+                        onClick={() => history.push({
+                            pathname: '/legal-map',
+                            state: { showBackButton: true }
+                        })}
                     >
                         <GlobalOutlined className="quick-service-icon" />
                         <div className="quick-service-title-text">法律地图</div>
@@ -571,7 +961,17 @@ export default function News() {
                     <Col span={12} key={item[0]}>
                         <Card
                             className="case-card"
-                            title={item[0]}
+                            title={
+                                <div className="case-card-header">
+                                    <span className="case-category-icon">
+                                        {item[0] === '民事案件' ? <TeamOutlined /> :
+                                            item[0] === '刑事案件' ? <SafetyCertificateOutlined /> :
+                                                item[0] === '行政案件' ? <BankOutlined /> :
+                                                    <FileTextOutlined />}
+                                    </span>
+                                    <span className="case-category-title">{item[0]}</span>
+                                </div>
+                            }
                             bordered={false}
                             hoverable
                         >
@@ -585,8 +985,22 @@ export default function News() {
                                     style: { textAlign: 'center' }
                                 }}
                                 renderItem={(data) => (
-                                    <List.Item>
-                                        <a href={`#/detail/${data.id}`}>{data.title}</a>
+                                    <List.Item className="case-list-item">
+                                        <div className="case-item-content">
+                                            <div className="case-item-title">
+                                                <a href={`#/detail/${data.id}`}>{data.title}</a>
+                                            </div>
+                                            <div className="case-item-meta">
+                                                <Space>
+                                                    <Tag color="blue">
+                                                        <ClockCircleOutlined /> {new Date(data.publishTime).toLocaleDateString()}
+                                                    </Tag>
+                                                    <Tag color="green">
+                                                        <EyeOutlined /> {Math.floor(Math.random() * 1000)} 阅读
+                                                    </Tag>
+                                                </Space>
+                                            </div>
+                                        </div>
                                     </List.Item>
                                 )}
                             />
@@ -606,7 +1020,10 @@ export default function News() {
                         <Card
                             hoverable
                             className="tool-card"
-                            onClick={() => tool.path && history.push(tool.path)}
+                            onClick={() => tool.path && history.push({
+                                pathname: tool.path,
+                                state: { showBackButton: true }
+                            })}
                         >
                             <div className="tool-icon">{tool.icon}</div>
                             <div className="tool-title">{tool.title}</div>
@@ -614,6 +1031,33 @@ export default function News() {
                         </Card>
                     </Col>
                 ))}
+                <Col span={24}>
+                    <Card className="calendar-card">
+                        <div className="calendar-header">
+                            <CalendarOutlined className="calendar-icon" />
+                            <span className="calendar-title">法律活动日历</span>
+                        </div>
+                        <Calendar
+                            fullscreen={false}
+                            dateCellRender={(date) => {
+                                const event = events.find(e => e.date === date.format('YYYY-MM-DD'));
+                                return event ? (
+                                    <Popover
+                                        content={
+                                            <div className="event-popover">
+                                                <div className="event-title">{event.content}</div>
+                                                <div className="event-date">{event.date}</div>
+                                            </div>
+                                        }
+                                        title="活动详情"
+                                    >
+                                        <div className="event-dot" />
+                                    </Popover>
+                                ) : null;
+                            }}
+                        />
+                    </Card>
+                </Col>
             </Row>
         </div>
     );
@@ -629,7 +1073,10 @@ export default function News() {
                                 <Card
                                     hoverable
                                     className="knowledge-card"
-                                    onClick={() => history.push(`/knowledge/${item.title}`)}
+                                    onClick={() => history.push({
+                                        pathname: `/knowledge/${item.title}`,
+                                        state: { showBackButton: true }
+                                    })}
                                 >
                                     <div className="knowledge-title">{item.title}</div>
                                     <div className="knowledge-category">{item.category}</div>
@@ -645,7 +1092,10 @@ export default function News() {
                                 <Card
                                     hoverable
                                     className="knowledge-card"
-                                    onClick={() => history.push(`/knowledge/${item.title}`)}
+                                    onClick={() => history.push({
+                                        pathname: `/knowledge/${item.title}`,
+                                        state: { showBackButton: true }
+                                    })}
                                 >
                                     <div className="knowledge-title">{item.title}</div>
                                     <div className="knowledge-category">{item.category}</div>
@@ -668,12 +1118,25 @@ export default function News() {
                     <List.Item>
                         <Card hoverable className="news-card">
                             <div className="news-header">
-                                <Tag color="blue">{item.category}</Tag>
-                                <Text type="secondary">{item.date}</Text>
+                                <Tag color="blue" className="news-tag">
+                                    <ThunderboltOutlined /> {item.category}
+                                </Tag>
+                                <Text type="secondary" className="news-date">
+                                    <CalendarOutlined /> {item.date}
+                                </Text>
                             </div>
-                            <div className="news-title">{item.title}</div>
+                            <div className="news-content">
+                                <div className="news-title">{item.title}</div>
+                                <div className="news-stats">
+                                    <Space>
+                                        <span><EyeOutlined /> {Math.floor(Math.random() * 1000)} 阅读</span>
+                                        <span><LikeOutlined /> {Math.floor(Math.random() * 100)} 点赞</span>
+                                        <span><CommentOutlined /> {Math.floor(Math.random() * 50)} 评论</span>
+                                    </Space>
+                                </div>
+                            </div>
                             <div className="news-footer">
-                                <Button type="link" icon={<RightOutlined />}>
+                                <Button type="link" icon={<RightOutlined />} className="news-more-btn">
                                     查看详情
                                 </Button>
                             </div>
@@ -681,6 +1144,102 @@ export default function News() {
                     </List.Item>
                 )}
             />
+        </div>
+    );
+
+    // 处理问题展开/收起
+    const toggleQuestion = (id) => {
+        setExpandedQuestions(prev => ({
+            ...prev,
+            [id]: !prev[id]
+        }));
+    };
+
+    // 渲染热门话题
+    const renderHotTopics = () => (
+        <Card
+            title={
+                <div className="section-header">
+                    <div className="section-title-wrapper">
+                        <QuestionCircleOutlined className="section-icon" />
+                        <span className="section-title">法律问答</span>
+                    </div>
+                    <span className="section-subtitle">常见法律问题解答</span>
+                </div>
+            }
+            className="hot-topics-section"
+        >
+            <List
+                itemLayout="vertical"
+                dataSource={hotTopics}
+                renderItem={item => (
+                    <List.Item>
+                        <div className="qa-item">
+                            <div
+                                className="question"
+                                onClick={() => toggleQuestion(item.id)}
+                            >
+                                <span className="q-tag">问</span>
+                                <span className="question-text">{item.question}</span>
+                                <span className="expand-icon">
+                                    {expandedQuestions[item.id] ? '收起' : '展开'}
+                                </span>
+                            </div>
+                            {expandedQuestions[item.id] && (
+                                <div className="answer">
+                                    <span className="a-tag">答</span>
+                                    <div className="answer-text">
+                                        {item.answer.split('\n').map((line, index) => (
+                                            <p key={index}>{line}</p>
+                                        ))}
+                                    </div>
+                                </div>
+                            )}
+                            <div className="qa-meta">
+                                <Tag color="blue">{item.category}</Tag>
+                            </div>
+                        </div>
+                    </List.Item>
+                )}
+            />
+        </Card>
+    );
+
+    // 渲染用户统计
+    const renderUserStats = () => (
+        <div className="user-stats-section">
+            <Row gutter={[16, 16]}>
+                <Col span={8}>
+                    <Card className="stat-card">
+                        <Statistic
+                            title="咨询次数"
+                            value={userStats.consultationCount}
+                            prefix={<MessageOutlined />}
+                        />
+                        <Progress percent={75} showInfo={false} />
+                    </Card>
+                </Col>
+                <Col span={8}>
+                    <Card className="stat-card">
+                        <Statistic
+                            title="收藏文章"
+                            value={userStats.savedArticles}
+                            prefix={<StarOutlined />}
+                        />
+                        <Progress percent={60} showInfo={false} />
+                    </Card>
+                </Col>
+                <Col span={8}>
+                    <Card className="stat-card">
+                        <Statistic
+                            title="完成任务"
+                            value={userStats.completedTasks}
+                            prefix={<TrophyOutlined />}
+                        />
+                        <Progress percent={40} showInfo={false} />
+                    </Card>
+                </Col>
+            </Row>
         </div>
     );
 
@@ -716,9 +1275,22 @@ export default function News() {
 
             <Content className="main-content">
                 <div className="content-wrapper">
+                    {/* 欢迎提示 */}
+                    {showWelcome && (
+                        <Alert
+                            message="欢迎使用智能化在线法律援助平台"
+                            description="我们提供专业的法律咨询、在线预约、智能问答等服务，让法律服务触手可及。"
+                            type="info"
+                            showIcon
+                            closable
+                            onClose={() => setShowWelcome(false)}
+                            className="welcome-alert"
+                        />
+                    )}
+
                     {/* 轮播图 */}
                     <div className="banner-section">
-                        <Carousel autoplay>
+                        <Carousel autoplay autoplaySpeed={1500}>
                             <div>
                                 <div className="banner-item" style={{ backgroundImage: 'url(/banner1.jpg)' }}>
                                     <div className="banner-content">
@@ -749,8 +1321,8 @@ export default function News() {
                                 <TabPane tab="案件信息" key="1">
                                     {renderCaseInfo()}
                                 </TabPane>
-                                <TabPane tab="法律资讯" key="2">
-                                    {renderLegalNews()}
+                                <TabPane tab="法律咨询" key="2">
+                                    {renderLegalConsultations()}
                                 </TabPane>
                                 <TabPane tab="法律工具" key="3">
                                     {renderLegalTools()}
@@ -759,9 +1331,17 @@ export default function News() {
                                     {renderKnowledgeBase()}
                                 </TabPane>
                             </Tabs>
+
+                            {/* 新增的用户统计和热门话题 */}
+                            {userInfo?.roleId === 3 && (
+                                <>
+                                    {renderUserStats()}
+                                    {renderHotTopics()}
+                                </>
+                            )}
                         </Col>
 
-                        {/* 右侧在线咨询模块 - 仅对普通用户显示 */}
+                        {/* 右侧在线咨询模块 */}
                         {userInfo?.roleId === 3 && (
                             <Col span={8}>
                                 <div className="chat-section">
