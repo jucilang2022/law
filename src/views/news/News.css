@@ -1707,3 +1707,281 @@ body {
         width: 100%;
     }
 }
+
+/* 使用指南样式 */
+.usage-guide-collapse {
+    background: #fff;
+    border-radius: 8px;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+}
+
+.usage-guide-collapse .ant-collapse-header {
+    font-size: 16px;
+    font-weight: 500;
+}
+
+.guide-card {
+    height: 100%;
+    transition: all 0.3s;
+}
+
+.guide-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+}
+
+.guide-step {
+    display: flex;
+    align-items: flex-start;
+    gap: 16px;
+}
+
+.step-number {
+    width: 32px;
+    height: 32px;
+    background: #1890ff;
+    color: white;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: bold;
+    flex-shrink: 0;
+}
+
+.step-content {
+    flex: 1;
+}
+
+.step-content h5 {
+    margin-bottom: 8px;
+    color: #262626;
+}
+
+.quick-tips {
+    padding: 16px;
+    background: #f5f5f5;
+    border-radius: 8px;
+}
+
+.quick-tips h5 {
+    color: #262626;
+    margin-bottom: 12px;
+}
+
+.quick-tips ul {
+    margin: 0;
+    padding-left: 20px;
+}
+
+.quick-tips li {
+    margin-bottom: 8px;
+    color: #595959;
+    line-height: 1.6;
+}
+
+.quick-tips li:last-child {
+    margin-bottom: 0;
+}
+
+/* 弹窗样式 */
+.modal-content {
+    padding: 20px;
+}
+
+.modal-content .ant-typography {
+    margin-bottom: 16px;
+}
+
+.modal-content ul {
+    padding-left: 20px;
+    margin-bottom: 16px;
+}
+
+.modal-content li {
+    margin-bottom: 8px;
+}
+
+.modal-content .ant-collapse {
+    background: #fff;
+}
+
+.modal-content .ant-collapse-item {
+    border-bottom: 1px solid #f0f0f0;
+}
+
+.modal-content .ant-collapse-header {
+    font-weight: 500;
+}
+
+.modal-content .ant-collapse-content {
+    background: #fafafa;
+}
+
+/* 底部链接样式 */
+.bottom-services-desc a {
+    color: #1890ff;
+    cursor: pointer;
+    transition: color 0.3s;
+}
+
+.bottom-services-desc a:hover {
+    color: #40a9ff;
+}
+
+/* 搜索相关样式 */
+.search-section {
+    display: flex;
+    justify-content: center;
+    margin-bottom: 24px;
+}
+
+.search-section .ant-input-search {
+    max-width: 500px;
+    width: 100%;
+}
+
+.search-section .ant-input {
+    border-radius: 4px;
+    border: 1px solid #d9d9d9;
+    transition: all 0.3s;
+}
+
+.search-section .ant-input:hover,
+.search-section .ant-input:focus {
+    border-color: #008181;
+    box-shadow: 0 0 0 2px rgba(0, 129, 129, 0.2);
+}
+
+.search-section .ant-input-search-button {
+    background: #008181;
+    border-color: #008181;
+}
+
+.search-section .ant-input-search-button:hover {
+    background: #00a0a0;
+    border-color: #00a0a0;
+}
+
+.search-result-card {
+    margin-bottom: 16px;
+    transition: all 0.3s;
+}
+
+.search-result-card:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+}
+
+.search-result-content {
+    padding: 8px;
+}
+
+.search-result-meta {
+    margin-top: 8px;
+}
+
+/* 搜索结果高亮样式 */
+.highlight {
+    background-color: #fffbe6;
+    padding: 0 2px;
+    border-radius: 2px;
+}
+
+.search-result-detail {
+    margin-top: 16px;
+    padding-top: 16px;
+    border-top: 1px solid #f0f0f0;
+}
+
+.search-result-description {
+    color: #333;
+    line-height: 1.8;
+    white-space: pre-wrap;
+    background: #f9f9f9;
+    padding: 16px;
+    border-radius: 8px;
+    margin-bottom: 16px;
+}
+
+.search-result-card {
+    transition: all 0.3s ease;
+}
+
+.search-result-card:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+}
+
+.search-result-content {
+    padding: 16px;
+}
+
+.search-result-meta {
+    margin-top: 12px;
+}
+
+.search-result-card .ant-card-body {
+    padding: 0;
+}
+
+.search-result-card .comments-section {
+    margin-top: 24px;
+    padding: 16px;
+    background: #f9f9f9;
+    border-radius: 8px;
+}
+
+.search-result-card .comment-item {
+    padding: 12px;
+    background: #fff;
+    border-radius: 8px;
+    margin-bottom: 12px;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+}
+
+.search-result-card .comment-header {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    margin-bottom: 8px;
+}
+
+.search-result-card .comment-username {
+    font-weight: 500;
+    color: #333;
+}
+
+.search-result-card .comment-time {
+    color: #999;
+    font-size: 12px;
+    margin-left: auto;
+}
+
+.search-result-card .comment-content {
+    color: #666;
+    line-height: 1.6;
+    margin-left: 40px;
+}
+
+.search-result-card .comment-input-section {
+    margin-top: 16px;
+    padding: 16px;
+    background: #fff;
+    border-radius: 8px;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+}
+
+.search-result-card .ant-input-textarea {
+    margin-bottom: 12px;
+}
+
+.search-result-card .ant-btn-primary {
+    background: #008181;
+    border-color: #008181;
+}
+
+.search-result-card .ant-btn-primary:hover {
+    background: #00a0a0;
+    border-color: #00a0a0;
+}

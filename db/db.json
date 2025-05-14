@@ -17,9 +17,9 @@
       "roleState": "true",
       "default": false,
       "id": 9,
-      "chatInfo": "[{\"type\":\"lawyer\",\"content\":\"/chat_images/1745408271653-36429306.jpg\",\"timestamp\":\"2025-04-23T11:37:51.661Z\",\"userId\":13,\"lawyerId\":9,\"messageType\":\"image\"},{\"type\":\"lawyer\",\"content\":\"看看这个\",\"timestamp\":\"2025-04-23T11:37:58.790Z\",\"userId\":13,\"lawyerId\":9},{\"type\":\"user\",\"content\":\"好看啊，太好看了\",\"timestamp\":\"2025-04-23T11:39:28.485Z\",\"userId\":11,\"lawyerId\":9},{\"type\":\"lawyer\",\"content\":\"我也觉得特别好看\",\"timestamp\":\"2025-04-23T11:44:34.171Z\",\"userId\":13,\"lawyerId\":9},{\"type\":\"user\",\"content\":\"是的\",\"timestamp\":\"2025-05-10T18:04:00.851Z\",\"userId\":12,\"lawyerId\":9},{\"type\":\"user\",\"content\":\"/chat_images/1746900576807-459797201.png\",\"timestamp\":\"2025-05-10T18:09:36.848Z\",\"userId\":12,\"lawyerId\":9,\"messageType\":\"image\"},{\"type\":\"lawyer\",\"content\":\"花里胡哨\",\"timestamp\":\"2025-05-10T18:09:53.453Z\",\"userId\":12,\"lawyerId\":9},{\"type\":\"user\",\"content\":\"/chat_audio/1746943933277-984226962.wav\",\"timestamp\":\"2025-05-11T06:12:13.294Z\",\"userId\":14,\"lawyerId\":9,\"messageType\":\"audio\"},{\"type\":\"user\",\"content\":\"hh\",\"timestamp\":\"2025-05-12T02:37:56.999Z\",\"userId\":12,\"lawyerId\":9}]",
+      "chatInfo": "[{\"type\":\"user\",\"content\":\"律师你好，我有一个问题要咨询下。\",\"timestamp\":\"2025-05-12T15:45:29.491Z\",\"userId\":12,\"lawyerId\":9},{\"type\":\"lawyer\",\"content\":\"你好，请问是什么问题呢？\",\"timestamp\":\"2025-05-12T15:45:40.130Z\",\"userId\":12,\"lawyerId\":9},{\"type\":\"user\",\"content\":\"是这样的，房子退租后房东不肯退还押金，要怎么办？\",\"timestamp\":\"2025-05-12T15:46:33.124Z\",\"userId\":12,\"lawyerId\":9},{\"type\":\"lawyer\",\"content\":\"关于退押金的相关问题，看一下租赁合同押金退还如何约定，依据约定履行，房东不肯协商处理的，可以向法院起诉解决，依法维权，向法院起诉要准备好租房合同等证据。\",\"timestamp\":\"2025-05-12T15:46:51.570Z\",\"userId\":12,\"lawyerId\":9},{\"type\":\"user\",\"content\":\"/chat_images/1747064862041-840446020.png\",\"timestamp\":\"2025-05-12T15:47:42.061Z\",\"userId\":12,\"lawyerId\":9,\"messageType\":\"image\"},{\"type\":\"user\",\"content\":\"这个是当时的押金合同，您看下。\",\"timestamp\":\"2025-05-12T15:48:11.220Z\",\"userId\":12,\"lawyerId\":9},{\"type\":\"lawyer\",\"content\":\"/chat_audio/1747064905491-423540109.wav\",\"timestamp\":\"2025-05-12T15:48:25.498Z\",\"userId\":12,\"lawyerId\":9,\"messageType\":\"audio\"},{\"type\":\"user\",\"content\":\"/chat_images/1747064942288-507751015.jpg\",\"timestamp\":\"2025-05-12T15:49:02.307Z\",\"userId\":12,\"lawyerId\":9,\"messageType\":\"image\"},{\"type\":\"user\",\"content\":\"您好，我有问题要咨询\",\"timestamp\":\"2025-05-14T03:16:41.156Z\",\"userId\":12,\"lawyerId\":9},{\"type\":\"lawyer\",\"content\":\"您好\",\"timestamp\":\"2025-05-14T03:16:49.637Z\",\"userId\":12,\"lawyerId\":9},{\"type\":\"lawyer\",\"content\":\"/chat_audio/1747192615564-45862184.wav\",\"timestamp\":\"2025-05-14T03:16:55.602Z\",\"userId\":12,\"lawyerId\":9,\"messageType\":\"audio\"},{\"type\":\"user\",\"content\":\"/chat_images/1747192629730-812652120.jpg\",\"timestamp\":\"2025-05-14T03:17:09.797Z\",\"userId\":12,\"lawyerId\":9,\"messageType\":\"image\"}]",
       "appointments": "[{\"id\":1746956422972,\"name\":\"王强\",\"phone\":\"15502921536\",\"appointmentType\":\"online\",\"date\":\"2025-05-18T09:40:19.090Z\",\"time\":\"09:30\",\"description\":\"不知道\",\"userId\":12,\"lawyerId\":9,\"status\":\"confirmed\",\"createTime\":\"2025-05-11T09:40:22.972Z\"},{\"id\":1746956742550,\"name\":\"王强\",\"phone\":\"15502921536\",\"appointmentType\":\"offline\",\"date\":\"2025-05-14T09:45:28.784Z\",\"time\":\"10:30\",\"description\":\"gg\",\"address\":\"的\",\"userId\":12,\"lawyerId\":9,\"status\":\"cancelled\",\"createTime\":\"2025-05-11T09:45:42.550Z\"},{\"id\":1746982706470,\"name\":\"王晓\",\"phone\":\"13222222222\",\"appointmentType\":\"online\",\"date\":\"2025-05-26T16:58:21.196Z\",\"time\":\"12:00\",\"description\":\"王晓\",\"userId\":12,\"lawyerId\":9,\"status\":\"confirmed\",\"createTime\":\"2025-05-11T16:58:26.470Z\"}]",
-      "cases": "[{\"id\":\"1746959878313\",\"appointmentId\":1746956422972,\"caseNumber\":\"110120130\",\"title\":\"王强案\",\"type\":\"civil\",\"description\":\"一些需求\",\"status\":\"completed\",\"createTime\":\"2025-05-11T10:37:58.313Z\",\"updateTime\":\"2025-05-11T10:38:35.570Z\",\"lawyerId\":9}]"
+      "cases": "[{\"id\":\"1746959878313\",\"appointmentId\":1746956422972,\"caseNumber\":\"110120130\",\"title\":\"王强案\",\"type\":\"civil\",\"description\":\"一些需求\",\"status\":\"completed\",\"createTime\":\"2025-05-11T10:37:58.313Z\",\"updateTime\":\"2025-05-11T10:38:35.570Z\",\"lawyerId\":9},{\"id\":\"1747065273508\",\"appointmentId\":1746982706470,\"caseNumber\":\"1123654\",\"title\":\"王晓案\",\"type\":\"administrative\",\"description\":\"房租拖欠\",\"status\":\"processing\",\"createTime\":\"2025-05-12T15:54:33.508Z\",\"updateTime\":\"2025-05-12T15:54:42.981Z\",\"lawyerId\":9},{\"id\":\"1747192342303\",\"appointmentId\":1746956422972,\"caseNumber\":\"11236545\",\"title\":\"王强案\",\"type\":\"criminal\",\"description\":\"描述\",\"status\":\"processing\",\"createTime\":\"2025-05-14T03:12:22.304Z\",\"updateTime\":\"2025-05-14T03:13:12.393Z\",\"lawyerId\":9}]"
     },
     {
       "username": "wang",
@@ -64,6 +64,14 @@
       "default": true,
       "roleId": 3,
       "id": 14
+    },
+    {
+      "username": "999",
+      "password": "999",
+      "roleState": true,
+      "default": true,
+      "roleId": 3,
+      "id": 15
     }
   ],
   "roles": [
@@ -1159,10 +1167,47 @@
       "auditState": 2,
       "publishState": 2,
       "createTime": 1742997138428,
-      "star": 11,
+      "star": 12,
       "view": 13,
       "id": 58,
-      "publishTime": 1742997145714
+      "publishTime": 1742997145714,
+      "comments": [
+        {
+          "id": 1747027553275,
+          "content": "真的吗",
+          "userId": 12,
+          "username": "123",
+          "createTime": "2025-05-12T05:25:53.275Z"
+        },
+        {
+          "id": 1747065106036,
+          "content": "哇，也是长知识了，以后需要好好思考了。",
+          "author": "123",
+          "timestamp": "2025-05-12T15:51:46.036Z",
+          "userId": 12
+        },
+        {
+          "id": 1747101044761,
+          "content": "最高法发布案例明确，父母一方抢夺、藏匿子女时，另一方可申请人身安全保护令，法院应予支持‌3。此案强化了对未成年子女权益的司法保护，遏制利用子女争夺财产的行为。",
+          "author": "admin1",
+          "timestamp": "2025-05-13T01:50:44.761Z",
+          "userId": 9
+        },
+        {
+          "id": 1747101139859,
+          "content": "太棒了",
+          "author": "admin1",
+          "timestamp": "2025-05-13T01:52:19.859Z",
+          "userId": 9
+        },
+        {
+          "id": 1747192751260,
+          "content": "长知识了",
+          "author": "123",
+          "timestamp": "2025-05-14T03:19:11.260Z",
+          "userId": 12
+        }
+      ]
     },
     {
       "title": "有关西安XX科技有限公司劳动仲裁案件",
@@ -1362,7 +1407,7 @@
       "auditState": 2,
       "publishState": 2,
       "createTime": 1745382838353,
-      "star": 3,
+      "star": 7,
       "view": 0,
       "id": 71,
       "publishTime": 1745382843740
@@ -1578,6 +1623,27 @@
           "userId": 9,
           "username": "admin1",
           "createTime": "2025-05-12T03:57:28.299Z"
+        }
+      ]
+    },
+    {
+      "title": "测试案件",
+      "content": "test",
+      "categoryId": 7,
+      "author": "123",
+      "publishState": 2,
+      "createTime": "2025-05-12T13:08:11.771Z",
+      "view": 0,
+      "star": 0,
+      "like": 0,
+      "id": 83,
+      "comments": [
+        {
+          "id": 1747055297248,
+          "content": "test",
+          "userId": 12,
+          "username": "123",
+          "createTime": "2025-05-12T13:08:17.248Z"
         }
       ]
     }

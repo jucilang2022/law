@@ -5,7 +5,7 @@ import {
     Card, Col, Row, List, Layout, Typography, Input, Button, Avatar,
     Select, message, Modal, Upload, Drawer, Menu, Tabs, Carousel,
     Statistic, Tag, Space, Tooltip, Badge, Divider, Progress, Rate,
-    Timeline, Alert, Popover, Calendar, Badge as AntBadge, Form
+    Timeline, Alert, Popover, Calendar, Badge as AntBadge, Form, Collapse
 } from 'antd';
 import {
     SendOutlined, UserOutlined, DeleteOutlined, PictureOutlined,
@@ -16,7 +16,8 @@ import {
     EnvironmentOutlined, ClockCircleOutlined, RightOutlined,
     CalendarOutlined, UploadOutlined, SearchOutlined, StarOutlined,
     FireOutlined, TrophyOutlined, LikeOutlined, ShareAltOutlined,
-    EyeOutlined, CommentOutlined, HeartOutlined, ThunderboltOutlined
+    EyeOutlined, CommentOutlined, HeartOutlined, ThunderboltOutlined,
+    InfoCircleOutlined
 } from '@ant-design/icons';
 import './News.css'
 import { useHistory } from 'react-router-dom'
@@ -26,6 +27,7 @@ const { Title, Paragraph, Text } = Typography;
 const { TextArea } = Input;
 const { Option } = Select;
 const { TabPane } = Tabs;
+const { Panel } = Collapse;
 
 export default function News() {
     const [list, setlist] = useState([])
@@ -94,9 +96,9 @@ export default function News() {
         completedTasks: 5
     });
     const [events, setEvents] = useState([
-        { date: '2024-03-20', content: '法律讲座：民法典解读' },
-        { date: '2024-03-25', content: '在线法律咨询日' },
-        { date: '2024-04-01', content: '法律援助志愿者培训' }
+        { date: '2025-03-20', content: '法律讲座：民法典解读' },
+        { date: '2025-03-25', content: '在线法律咨询日' },
+        { date: '2025-04-01', content: '法律援助志愿者培训' }
     ]);
     const [showWelcome, setShowWelcome] = useState(true);
     const history = useHistory()
@@ -107,6 +109,13 @@ export default function News() {
     const [commentInputs, setCommentInputs] = useState({});
     const [comments, setComments] = useState({});
     const [expandedConsultations, setExpandedConsultations] = useState({});
+    const [isAboutModalVisible, setIsAboutModalVisible] = useState(false);
+    const [isHelpModalVisible, setIsHelpModalVisible] = useState(false);
+    const [isPrivacyModalVisible, setIsPrivacyModalVisible] = useState(false);
+    const [isTermsModalVisible, setIsTermsModalVisible] = useState(false);
+    const [searchQuery, setSearchQuery] = useState('');
+    const [searchResults, setSearchResults] = useState([]);
+    const [expandedSearchResults, setExpandedSearchResults] = useState({});
 
     // 滚动到最新消息
     const scrollToBottom = () => {
@@ -125,7 +134,9 @@ export default function News() {
     // 获取案件信息
     useEffect(() => {
         axios.get("/news?publishState=2&_expand=category").then(res => {
-            setlist(Object.entries(_.groupBy(res.data, item => item.category.title)))
+            // 过滤掉id为7的法律咨询分类
+            const filteredData = res.data.filter(item => item.categoryId !== 7);
+            setlist(Object.entries(_.groupBy(filteredData, item => item.category.title)))
         })
     }, [])
 
@@ -563,9 +574,9 @@ export default function News() {
     useEffect(() => {
         // 这里可以替换为实际的API调用
         const mockNews = [
-            { id: 1, title: '最高法发布新规：关于审理民间借贷案件的规定', date: '2024-03-15', category: '司法解释' },
-            { id: 2, title: '《民法典》实施后，这些变化与你息息相关', date: '2024-03-14', category: '法律动态' },
-            { id: 3, title: '最高检发布典型案例：打击电信网络诈骗', date: '2024-03-13', category: '案例指导' },
+            { id: 1, title: '最高法发布新规：关于审理民间借贷案件的规定', date: '2025-03-15', category: '司法解释' },
+            { id: 2, title: '《民法典》实施后，这些变化与你息息相关', date: '2025-03-14', category: '法律动态' },
+            { id: 3, title: '最高检发布典型案例：打击电信网络诈骗', date: '2025-03-13', category: '案例指导' },
         ];
         setLegalNews(mockNews);
     }, []);
@@ -709,19 +720,74 @@ export default function News() {
         }
     };
 
+    // 模糊搜索算法
+    const fuzzySearch = (query, items) => {
+        if (!query) return items;
+
+        const searchTerms = query.toLowerCase().split(' ');
+        return items.filter(item => {
+            const title = item.title.toLowerCase();
+            const content = item.content?.toLowerCase() || '';
+            return searchTerms.every(term =>
+                title.includes(term) || content.includes(term)
+            );
+        });
+    };
+
+    // 关键词匹配算法
+    const keywordMatch = (text, keywords) => {
+        const textLower = text.toLowerCase();
+        return keywords.filter(keyword =>
+            textLower.includes(keyword.toLowerCase())
+        ).length;
+    };
+
+    // 处理搜索
+    const handleSearch = (value) => {
+        setSearchQuery(value);
+        const results = fuzzySearch(value, list.flatMap(([_, items]) => items));
+        setSearchResults(results);
+    };
+
+    // 处理搜索结果展开/收起
+    const toggleSearchResult = (id) => {
+        setExpandedSearchResults(prev => ({
+            ...prev,
+            [id]: !prev[id]
+        }));
+        // 如果展开，则获取评论
+        if (!expandedSearchResults[id]) {
+            fetchComments(id);
+        }
+    };
+
     // 渲染法律咨询模块
     const renderLegalConsultations = () => (
         <div className="legal-consultations">
             {userInfo?.roleId === 3 && (
-                <Button
-                    type="primary"
-                    icon={<MessageOutlined />}
-                    onClick={handleCreateConsultation}
-                    className="create-consultation-btn"
-                    style={{ marginBottom: 20 }}
-                >
-                    新建咨询
-                </Button>
+                <div style={{ display: 'flex', alignItems: 'center', marginBottom: 20, gap: '16px' }}>
+                    <Button
+                        type="primary"
+                        icon={<MessageOutlined />}
+                        onClick={handleCreateConsultation}
+                        className="create-consultation-btn"
+                    >
+                        新建咨询
+                    </Button>
+                    <Input.Search
+                        placeholder="搜索咨询内容..."
+                        allowClear
+                        enterButton="搜索"
+                        style={{ width: '400px' }}
+                        onSearch={value => {
+                            const results = consultations.filter(item =>
+                                item.title.toLowerCase().includes(value.toLowerCase()) ||
+                                item.content.toLowerCase().includes(value.toLowerCase())
+                            );
+                            setConsultations(results);
+                        }}
+                    />
+                </div>
             )}
 
             <Row gutter={[16, 16]}>
@@ -956,58 +1022,101 @@ export default function News() {
     // 渲染案件信息
     const renderCaseInfo = () => (
         <div className="case-section">
-            <Row gutter={[20, 20]}>
-                {list.map(item =>
-                    <Col span={12} key={item[0]}>
-                        <Card
-                            className="case-card"
-                            title={
-                                <div className="case-card-header">
-                                    <span className="case-category-icon">
-                                        {item[0] === '民事案件' ? <TeamOutlined /> :
-                                            item[0] === '刑事案件' ? <SafetyCertificateOutlined /> :
-                                                item[0] === '行政案件' ? <BankOutlined /> :
-                                                    <FileTextOutlined />}
-                                    </span>
-                                    <span className="case-category-title">{item[0]}</span>
+            <div className="search-section" style={{ marginBottom: 20 }}>
+                <Input.Search
+                    placeholder="搜索案件信息..."
+                    allowClear
+                    enterButton="搜索"
+                    size="large"
+                    value={searchQuery}
+                    onChange={e => handleSearch(e.target.value)}
+                    style={{ maxWidth: 500 }}
+                />
+            </div>
+            {searchQuery ? (
+                <List
+                    dataSource={searchResults}
+                    renderItem={item => (
+                        <List.Item>
+                            <Card
+                                className="search-result-card"
+                                hoverable
+                                onClick={() => history.push({
+                                    pathname: `/detail/${item.id}`,
+                                    state: { showBackButton: true }
+                                })}
+                            >
+                                <div className="search-result-content">
+                                    <Title level={5}>{item.title}</Title>
+                                    <div className="search-result-meta">
+                                        <Space>
+                                            <Tag color="blue">
+                                                <ClockCircleOutlined /> {new Date(item.publishTime).toLocaleDateString()}
+                                            </Tag>
+                                            <Tag color="green">
+                                                <EyeOutlined /> {Math.floor(Math.random() * 1000)} 阅读
+                                            </Tag>
+                                        </Space>
+                                    </div>
                                 </div>
-                            }
-                            bordered={false}
-                            hoverable
-                        >
-                            <List
-                                size="small"
+                            </Card>
+                        </List.Item>
+                    )}
+                />
+            ) : (
+                <Row gutter={[20, 20]}>
+                    {list.map(item =>
+                        <Col span={12} key={item[0]}>
+                            <Card
+                                className="case-card"
+                                title={
+                                    <div className="case-card-header">
+                                        <span className="case-category-icon">
+                                            {item[0] === '民事案件' ? <TeamOutlined /> :
+                                                item[0] === '刑事案件' ? <SafetyCertificateOutlined /> :
+                                                    item[0] === '行政案件' ? <BankOutlined /> :
+                                                        <FileTextOutlined />}
+                                        </span>
+                                        <span className="case-category-title">{item[0]}</span>
+                                    </div>
+                                }
                                 bordered={false}
-                                dataSource={item[1]}
-                                pagination={{
-                                    pageSize: 3,
-                                    size: "small",
-                                    style: { textAlign: 'center' }
-                                }}
-                                renderItem={(data) => (
-                                    <List.Item className="case-list-item">
-                                        <div className="case-item-content">
-                                            <div className="case-item-title">
-                                                <a href={`#/detail/${data.id}`}>{data.title}</a>
+                                hoverable
+                            >
+                                <List
+                                    size="small"
+                                    bordered={false}
+                                    dataSource={item[1]}
+                                    pagination={{
+                                        pageSize: 3,
+                                        size: "small",
+                                        style: { textAlign: 'center' }
+                                    }}
+                                    renderItem={(data) => (
+                                        <List.Item className="case-list-item">
+                                            <div className="case-item-content">
+                                                <div className="case-item-title">
+                                                    <a href={`#/detail/${data.id}`}>{data.title}</a>
+                                                </div>
+                                                <div className="case-item-meta">
+                                                    <Space>
+                                                        <Tag color="blue">
+                                                            <ClockCircleOutlined /> {new Date(data.publishTime).toLocaleDateString()}
+                                                        </Tag>
+                                                        <Tag color="green">
+                                                            <EyeOutlined /> {Math.floor(Math.random() * 1000)} 阅读
+                                                        </Tag>
+                                                    </Space>
+                                                </div>
                                             </div>
-                                            <div className="case-item-meta">
-                                                <Space>
-                                                    <Tag color="blue">
-                                                        <ClockCircleOutlined /> {new Date(data.publishTime).toLocaleDateString()}
-                                                    </Tag>
-                                                    <Tag color="green">
-                                                        <EyeOutlined /> {Math.floor(Math.random() * 1000)} 阅读
-                                                    </Tag>
-                                                </Space>
-                                            </div>
-                                        </div>
-                                    </List.Item>
-                                )}
-                            />
-                        </Card>
-                    </Col>
-                )}
-            </Row>
+                                        </List.Item>
+                                    )}
+                                />
+                            </Card>
+                        </Col>
+                    )}
+                </Row>
+            )}
         </div>
     );
 
@@ -1275,22 +1384,78 @@ export default function News() {
 
             <Content className="main-content">
                 <div className="content-wrapper">
-                    {/* 欢迎提示 */}
-                    {showWelcome && (
-                        <Alert
-                            message="欢迎使用智能化在线法律援助平台"
-                            description="我们提供专业的法律咨询、在线预约、智能问答等服务，让法律服务触手可及。"
-                            type="info"
-                            showIcon
-                            closable
-                            onClose={() => setShowWelcome(false)}
-                            className="welcome-alert"
-                        />
-                    )}
+                    {/* 欢迎提示和使用指南 */}
+                    <Collapse
+                        defaultActiveKey={['1']}
+                        className="usage-guide-collapse"
+                        style={{ marginBottom: 20 }}
+                    >
+                        <Panel
+                            header={
+                                <div style={{ display: 'flex', alignItems: 'center' }}>
+                                    <InfoCircleOutlined style={{ marginRight: 8 }} />
+                                    <span>欢迎使用智能化在线法律援助平台</span>
+                                </div>
+                            }
+                            key="1"
+                        >
+                            <div className="usage-guide-content">
+                                <div style={{ marginBottom: '16px', color: '#666' }}>
+                                    我们提供专业的法律咨询、在线预约、智能问答等服务，让法律服务触手可及。
+                                </div>
+                                <Row gutter={[24, 24]}>
+                                    <Col span={8}>
+                                        <Card className="guide-card">
+                                            <div className="guide-step">
+                                                <div className="step-number">1</div>
+                                                <div className="step-content">
+                                                    <Title level={5}>注册登录</Title>
+                                                    <Text>首次使用请先注册账号，已有账号可直接登录。登录后即可使用平台全部功能。</Text>
+                                                </div>
+                                            </div>
+                                        </Card>
+                                    </Col>
+                                    <Col span={8}>
+                                        <Card className="guide-card">
+                                            <div className="guide-step">
+                                                <div className="step-number">2</div>
+                                                <div className="step-content">
+                                                    <Title level={5}>选择服务</Title>
+                                                    <Text>根据需求选择：在线咨询、智能问答、预约服务、法律工具等。</Text>
+                                                </div>
+                                            </div>
+                                        </Card>
+                                    </Col>
+                                    <Col span={8}>
+                                        <Card className="guide-card">
+                                            <div className="guide-step">
+                                                <div className="step-number">3</div>
+                                                <div className="step-content">
+                                                    <Title level={5}>获取帮助</Title>
+                                                    <Text>专业律师在线解答，AI助手24小时服务，让您随时随地获取法律支持。</Text>
+                                                </div>
+                                            </div>
+                                        </Card>
+                                    </Col>
+                                </Row>
+                                <Divider />
+                                <div className="quick-tips">
+                                    <Title level={5}>快速提示：</Title>
+                                    <ul>
+                                        <li>使用智能法律咨询，可以快速获取常见法律问题的解答</li>
+                                        <li>在线咨询功能支持文字、图片、语音等多种沟通方式</li>
+                                        <li>法律工具集提供诉讼费计算、文书生成等实用功能</li>
+                                        <li>法律知识库收录了丰富的法律知识和案例</li>
+                                        <li>遇到紧急情况，建议直接拨打服务热线获取帮助</li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </Panel>
+                    </Collapse>
 
                     {/* 轮播图 */}
                     <div className="banner-section">
-                        <Carousel autoplay autoplaySpeed={1500}>
+                        <Carousel autoplay autoplaySpeed={2000}>
                             <div>
                                 <div className="banner-item" style={{ backgroundImage: 'url(/banner1.jpg)' }}>
                                     <div className="banner-content">
@@ -1514,10 +1679,10 @@ export default function News() {
                                     <div className="bottom-services-title-text">快速链接</div>
                                     <div className="bottom-services-desc">
                                         <Space direction="vertical">
-                                            <a href="#/about">关于我们</a>
-                                            <a href="#/help">帮助中心</a>
-                                            <a href="#/privacy">隐私政策</a>
-                                            <a href="#/terms">服务条款</a>
+                                            <a onClick={() => setIsAboutModalVisible(true)}>关于我们</a>
+                                            <a onClick={() => setIsHelpModalVisible(true)}>帮助中心</a>
+                                            <a onClick={() => setIsPrivacyModalVisible(true)}>隐私政策</a>
+                                            <a onClick={() => setIsTermsModalVisible(true)}>服务条款</a>
                                         </Space>
                                     </div>
                                 </Card>
@@ -1525,7 +1690,7 @@ export default function News() {
                         </Row>
                         <Divider />
                         <div className="footer-bottom">
-                            <Text>© 2024 智能化在线法律援助平台 版权所有</Text>
+                            <Text>© 2025 智能化在线法律援助平台 版权所有</Text>
                         </div>
                     </div>
                 </div>
@@ -1601,6 +1766,164 @@ export default function News() {
                     </div>
                 </div>
             </Drawer>
+
+            {/* 添加四个弹窗组件 */}
+            <Modal
+                title="关于我们"
+                open={isAboutModalVisible}
+                onCancel={() => setIsAboutModalVisible(false)}
+                footer={null}
+                width={800}
+            >
+                <div className="modal-content">
+                    <Title level={4}>智能化在线法律援助平台</Title>
+                    <Paragraph>
+                        我们是一家致力于为广大群众提供便捷、专业法律服务的在线平台。通过互联网技术，我们打破了传统法律服务的地域限制，让每个人都能轻松获取专业的法律支持。
+                    </Paragraph>
+                    <Title level={5}>我们的使命</Title>
+                    <Paragraph>
+                        让法律服务触手可及，为每个人提供平等的法律保护。
+                    </Paragraph>
+                    <Title level={5}>我们的愿景</Title>
+                    <Paragraph>
+                        成为最受信赖的在线法律援助平台，推动法律服务普惠化发展。
+                    </Paragraph>
+                    <Title level={5}>我们的优势</Title>
+                    <ul>
+                        <li>专业的律师团队</li>
+                        <li>智能化的服务系统</li>
+                        <li>便捷的在线咨询</li>
+                        <li>全面的法律工具</li>
+                        <li>24小时不间断服务</li>
+                    </ul>
+                </div>
+            </Modal>
+
+            <Modal
+                title="帮助中心"
+                open={isHelpModalVisible}
+                onCancel={() => setIsHelpModalVisible(false)}
+                footer={null}
+                width={800}
+            >
+                <div className="modal-content">
+                    <Collapse defaultActiveKey={['1']}>
+                        <Panel header="如何开始使用平台？" key="1">
+                            <Paragraph>
+                                1. 注册/登录账号<br />
+                                2. 选择需要的服务类型<br />
+                                3. 按照指引完成操作
+                            </Paragraph>
+                        </Panel>
+                        <Panel header="如何预约律师？" key="2">
+                            <Paragraph>
+                                1. 进入预约服务页面<br />
+                                2. 选择律师和时间<br />
+                                3. 填写预约信息<br />
+                                4. 确认预约
+                            </Paragraph>
+                        </Panel>
+                        <Panel header="如何使用智能法律咨询？" key="3">
+                            <Paragraph>
+                                1. 点击"智能法律咨询"按钮<br />
+                                2. 输入您的问题<br />
+                                3. 等待AI助手回复
+                            </Paragraph>
+                        </Panel>
+                        <Panel header="常见问题" key="4">
+                            <Paragraph>
+                                <ul>
+                                    <li>如何修改个人信息？</li>
+                                    <li>如何查看历史咨询记录？</li>
+                                    <li>如何取消预约？</li>
+                                    <li>如何联系客服？</li>
+                                </ul>
+                            </Paragraph>
+                        </Panel>
+                    </Collapse>
+                </div>
+            </Modal>
+
+            <Modal
+                title="隐私政策"
+                open={isPrivacyModalVisible}
+                onCancel={() => setIsPrivacyModalVisible(false)}
+                footer={null}
+                width={800}
+            >
+                <div className="modal-content">
+                    <Title level={4}>隐私政策</Title>
+                    <Paragraph>
+                        本平台非常重视用户的隐私保护，我们承诺对您的个人信息进行严格保密。
+                    </Paragraph>
+                    <Title level={5}>信息收集</Title>
+                    <Paragraph>
+                        我们收集的信息包括但不限于：
+                        <ul>
+                            <li>基本信息（姓名、联系方式等）</li>
+                            <li>账户信息（用户名、密码等）</li>
+                            <li>使用记录（咨询记录、预约记录等）</li>
+                        </ul>
+                    </Paragraph>
+                    <Title level={5}>信息使用</Title>
+                    <Paragraph>
+                        我们使用收集的信息用于：
+                        <ul>
+                            <li>提供法律服务</li>
+                            <li>改进服务质量</li>
+                            <li>发送服务通知</li>
+                        </ul>
+                    </Paragraph>
+                    <Title level={5}>信息保护</Title>
+                    <Paragraph>
+                        我们采取严格的安全措施保护您的个人信息，包括：
+                        <ul>
+                            <li>数据加密存储</li>
+                            <li>访问权限控制</li>
+                            <li>定期安全审计</li>
+                        </ul>
+                    </Paragraph>
+                </div>
+            </Modal>
+
+            <Modal
+                title="服务条款"
+                open={isTermsModalVisible}
+                onCancel={() => setIsTermsModalVisible(false)}
+                footer={null}
+                width={800}
+            >
+                <div className="modal-content">
+                    <Title level={4}>服务条款</Title>
+                    <Paragraph>
+                        欢迎使用智能化在线法律援助平台，请仔细阅读以下条款。
+                    </Paragraph>
+                    <Title level={5}>服务内容</Title>
+                    <Paragraph>
+                        本平台提供以下服务：
+                        <ul>
+                            <li>在线法律咨询</li>
+                            <li>律师预约</li>
+                            <li>智能法律问答</li>
+                            <li>法律工具使用</li>
+                        </ul>
+                    </Paragraph>
+                    <Title level={5}>用户义务</Title>
+                    <Paragraph>
+                        用户在使用本平台时应：
+                        <ul>
+                            <li>提供真实、准确的信息</li>
+                            <li>遵守相关法律法规</li>
+                            <li>保护账号安全</li>
+                            <li>不得从事违法活动</li>
+                        </ul>
+                    </Paragraph>
+                    <Title level={5}>免责声明</Title>
+                    <Paragraph>
+                        本平台提供的法律建议仅供参考，不构成正式的法律意见。对于重大法律问题，建议咨询专业律师。
+                    </Paragraph>
+                </div>
+            </Modal>
         </Layout>
     )
 }

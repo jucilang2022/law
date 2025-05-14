@@ -1,12 +1,11 @@
 import React, { useState, useEffect } from 'react';
 import {
-    Card, Form, Input, Select, DatePicker, TimePicker,
-    Button, message, Radio, Space, Row, Col, Typography,
+    Card, Form, Input, Select, DatePicker,
+    Button, message, Radio, Row, Col, Typography,
     Steps, Divider, Avatar, Tag
 } from 'antd';
 import {
-    UserOutlined, CalendarOutlined, EnvironmentOutlined,
-    ClockCircleOutlined, VideoCameraOutlined, HomeOutlined, CheckCircleOutlined,
+    UserOutlined, EnvironmentOutlined, VideoCameraOutlined, HomeOutlined, CheckCircleOutlined,
     PhoneOutlined, ArrowLeftOutlined
 } from '@ant-design/icons';
 import axios from 'axios';

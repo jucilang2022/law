@@ -14,7 +14,11 @@ export default function Login(props) {
           message.error('用户名或密码错误！');
         } else {
           localStorage.setItem('token', JSON.stringify(res.data[0]))
-          props.history.push('/')
+          if (res.data[0].roleId === 3) {
+            props.history.push('/users')
+          } else {
+            props.history.push('/home')
+          }
         }
       })
     } else {

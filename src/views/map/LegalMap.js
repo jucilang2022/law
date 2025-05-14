@@ -143,7 +143,7 @@ export default function LegalMap() {
 
         // 加载地图脚本
         script = document.createElement('script');
-        script.src = `https://webapi.amap.com/maps?v=2.0&key=60430be3babfed1558a7a94d759ce6a9&plugin=AMap.Geolocation,AMap.ToolBar,AMap.Scale`;
+        script.src = `https://webapi.amap.com/maps?v=2.0&key=a2fa96f599d935ae06e7d7739c4c3bc5&plugin=AMap.Geolocation,AMap.ToolBar,AMap.Scale`;
         script.async = true;
         script.onload = () => {
             if (window.AMap) {
